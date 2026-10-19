@@ -1,7 +1,8 @@
 /**
- * Element Paint — Reklama va Kontent Boshqaruv Tizimi (App Logic v2.0)
+ * Element Paint — Reklama va Kontent Boshqaruv Tizimi (App Logic v2.1)
+ * 100% O‘zbek tilida (Boshqa tillar cheklangan va faqat o'zbekcha mahsulot nomlari va birliklari)
  * 73 ta mahsulot monitoringi, video hisoboti (tasdiqlangan/kutilayotgan),
- * avtomatik hozirgi vaqt belgilash va aniq dizayn
+ * avtomatik hozirgi vaqt belgilash
  */
 
 (function () {
@@ -22,12 +23,12 @@
   };
 
   let currentFilter = {
-    status: 'all',       // 'all' | 'red' | 'yellow' | 'blue' | 'approved'
+    status: 'all',        // 'all' | 'red' | 'yellow' | 'blue' | 'approved'
     videoPresence: 'all', // 'all' | 'has_videos' | 'has_approved' | 'has_pending' | 'no_videos'
     brand: 'all',
     category: 'all',
     search: '',
-    view: 'table'        // 'table' | 'cards'
+    view: 'table'         // 'table' | 'cards'
   };
 
   let activeProductId = null;
@@ -125,7 +126,7 @@
     toastContainer: document.getElementById('toastContainer')
   };
 
-  // Status mapping
+  // Status mapping — Sof o‘zbek tilida
   const STATUS_CONFIG = {
     red: {
       key: 'red',
@@ -150,16 +151,27 @@
     }
   };
 
+  // Video va kontent formatlari — To‘liq o‘zbekcha nomlar bilan
   const TYPE_NAMES = {
-    reels: 'Reels / Shorts',
-    tiktok: 'TikTok',
-    shorts: 'YouTube Shorts',
-    youtube: 'YouTube Video',
-    banner: 'Banner / Post',
-    telegram: 'Telegram Post',
-    tv: 'TV / Tashqi reklama',
+    reels: 'Instagram Reels (Qisqa video)',
+    tiktok: 'TikTok Video',
+    shorts: 'YouTube Shorts (Qisqa video)',
+    youtube: 'YouTube Video (Katta video)',
+    banner: 'Foto / Banner reklama',
+    telegram: 'Telegram Post / Xabar',
+    tv: 'TV / OAV / Tashqi reklama',
     script: 'Reklama ssenariysi'
   };
+
+  // O'lchov birliklarini o'zbekchaga o'girish
+  function getPackageUnit(product) {
+    const u = (product && product.packageUnit) ? String(product.packageUnit).toLowerCase() : 'kg';
+    if (u === 'kg') return 'kg';
+    if (u === 'l' || u === 'liter' || u === 'litre') return 'litr';
+    if (u === 'g' || u === 'gram') return 'gramm';
+    if (u === 'pcs' || u === 'dona' || u === 'ta') return 'dona';
+    return u;
+  }
 
   // Initialize
   function init() {
@@ -171,12 +183,12 @@
     render();
   }
 
-  // Load Catalog Data
+  // Load Catalog Data (faqat o'zbekcha tarjima bilan)
   function loadCatalogData() {
     if (window.CATALOG_DATA && window.CATALOG_DATA.products) {
       catalog = window.CATALOG_DATA;
     } else {
-      console.warn('window.CATALOG_DATA topilmadi, lokal fetch qilinadi...');
+      console.warn('Katalog maʼlumotlari yuklanmoqda...');
       fetch('data/catalog-snapshot.json')
         .then(res => res.json())
         .then(data => {
@@ -184,7 +196,7 @@
           setupFilters();
           render();
         })
-        .catch(err => console.error('Katalogni yuklashda xato:', err));
+        .catch(err => console.error('Katalogni yuklashda xatolik:', err));
     }
   }
 
@@ -193,21 +205,20 @@
     try {
       let saved = localStorage.getItem(STORAGE_KEY);
       if (!saved) {
-        // Fallback check for v1
         saved = localStorage.getItem(LEGACY_STORAGE_KEY);
       }
       if (saved) {
         adStore = JSON.parse(saved);
       }
     } catch (e) {
-      console.error('LocalStorage o‘qishda xato:', e);
+      console.error('LocalStorage o‘qishda xatolik:', e);
     }
 
     if (!adStore.products) {
       adStore.products = {};
     }
 
-    // Default status is 'red' (Hali qilinmagan) for every product
+    // Har bir mahsulot uchun boshlang'ich holat: 'red' (Hali qilinmagan)
     catalog.products.forEach(p => {
       if (!adStore.products[p.id]) {
         adStore.products[p.id] = {
@@ -215,7 +226,6 @@
           tasks: []
         };
       } else {
-        // Ensure each task has isApproved boolean
         (adStore.products[p.id].tasks || []).forEach(t => {
           if (t.isApproved === undefined) {
             t.isApproved = false;
@@ -230,44 +240,44 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(adStore));
     } catch (e) {
-      console.error('LocalStorage saqlashda xato:', e);
+      console.error('LocalStorage saqlashda xatolik:', e);
       showToast('Xatolik: Ma’lumotlarni brauzerga saqlab bo‘lmadi!', 'warning');
     }
   }
 
-  // Setup Category and Brand Dropdowns
+  // Setup Category and Brand Dropdowns (100% O‘zbekcha)
   function setupFilters() {
     if (!catalog.categories || !catalog.products) return;
 
-    // Brands
+    // Brendlar
     const brands = Array.from(new Set(catalog.products.map(p => p.brand).filter(Boolean))).sort();
     el.brandSelect.innerHTML = '<option value="all">Barcha brendlar</option>' +
       brands.map(b => `<option value="${escapeHtml(b)}">${escapeHtml(b)}</option>`).join('');
 
-    // Categories
-    el.categorySelect.innerHTML = '<option value="all">Barcha kategoriyalar</option>' +
+    // Toifalar (kategoriyalar) — qat'iy o'zbekcha nomi olinadi
+    el.categorySelect.innerHTML = '<option value="all">Barcha toifalar</option>' +
       catalog.categories.map(c => {
-        const name = c.name?.uz || c.name || c.id;
+        const name = (c.name && typeof c.name === 'object') ? (c.name.uz || Object.values(c.name)[0]) : (c.name || c.id);
         return `<option value="${escapeHtml(c.id)}">${escapeHtml(name)}</option>`;
       }).join('');
   }
 
   // Setup Event Listeners
   function setupEventListeners() {
-    // Status tabs
+    // Holatlar bo'yicha saralash
     el.tabAll.addEventListener('click', () => setStatusFilter('all'));
     el.tabRed.addEventListener('click', () => setStatusFilter('red'));
     el.tabYellow.addEventListener('click', () => setStatusFilter('yellow'));
     el.tabBlue.addEventListener('click', () => setStatusFilter('blue'));
     el.tabApproved.addEventListener('click', () => setStatusFilter('approved'));
 
-    // Video presence filter
+    // Videolar mavjudligi bo'yicha filter
     el.videoFilterSelect.addEventListener('change', (e) => {
       currentFilter.videoPresence = e.target.value;
       render();
     });
 
-    // Search and select filters
+    // Jonli qidiruv
     el.searchInput.addEventListener('input', (e) => {
       currentFilter.search = e.target.value.toLowerCase().trim();
       render();
@@ -297,21 +307,21 @@
       render();
     });
 
-    // View toggles
+    // Ko'rinish almashtirish
     el.viewTableBtn.addEventListener('click', () => switchView('table'));
     el.viewCardsBtn.addEventListener('click', () => switchView('cards'));
 
-    // Export / Import
+    // Eksport va Import
     el.btnExportJson.addEventListener('click', exportJson);
     el.btnImportJson.addEventListener('click', () => el.fileImportInput.click());
     el.fileImportInput.addEventListener('change', importJson);
     el.btnExportCsv.addEventListener('click', exportCsv);
     el.btnPrintReport.addEventListener('click', () => window.print());
 
-    // Modal Events
+    // Modal hodisalari
     el.modalCloseBtn.addEventListener('click', closeModal);
 
-    // Modal Status Radio Buttons
+    // Modal Status Radio tugmalari
     [el.statusRadioRed, el.statusRadioYellow, el.statusRadioBlue].forEach(radio => {
       radio.addEventListener('change', (e) => {
         if (!activeProductId) return;
@@ -319,16 +329,16 @@
         setProductStatus(activeProductId, newStatus);
         updateModalStatusSelection(newStatus);
         render();
-        showToast(`Mahsulot holati: "${STATUS_CONFIG[newStatus].label}" ga o'zgartirildi`, 'info');
+        showToast(`Mahsulot holati: «${STATUS_CONFIG[newStatus].label}» ga o‘zgartirildi`, 'info');
       });
     });
 
-    // Task Form submit
+    // Topshiriq formasini yuborish
     el.taskForm.addEventListener('submit', handleTaskFormSubmit);
     el.btnCancelTaskEdit.addEventListener('click', cancelTaskEdit);
   }
 
-  // Light-dismiss implementation following modern-web-guidance for <dialog closedby="any">
+  // Modal dialog yopilishi
   function setupModalLightDismiss() {
     const dialog = el.productModal;
     if (!dialog) return;
@@ -387,7 +397,7 @@
     }
   }
 
-  // Get product ad data
+  // Mahsulot reklama ma'lumotlarini olish
   function getProductAdData(productId) {
     if (!adStore.products[productId]) {
       adStore.products[productId] = {
@@ -398,14 +408,14 @@
     return adStore.products[productId];
   }
 
-  // Set product status
+  // Mahsulot statusini belgilash
   function setProductStatus(productId, status) {
     const data = getProductAdData(productId);
     data.status = status;
     saveAdStore();
   }
 
-  // Filtered Products
+  // Filtrlangan mahsulotlar ro'yxati
   function getFilteredProducts() {
     return catalog.products.filter(product => {
       const adData = getProductAdData(product.id);
@@ -414,37 +424,36 @@
       const hasApprovedTask = tasks.some(t => t.isApproved);
       const hasPendingTask = tasks.some(t => !t.isApproved);
 
-      // Status filter
+      // Status filtri
       if (currentFilter.status === 'approved') {
         if (!hasApprovedTask) return false;
       } else if (currentFilter.status !== 'all' && productStatus !== currentFilter.status) {
         return false;
       }
 
-      // Video Presence filter
+      // Video mavjudligi bo'yicha
       if (currentFilter.videoPresence === 'has_videos' && tasks.length === 0) return false;
       if (currentFilter.videoPresence === 'has_approved' && !hasApprovedTask) return false;
       if (currentFilter.videoPresence === 'has_pending' && !hasPendingTask) return false;
       if (currentFilter.videoPresence === 'no_videos' && tasks.length > 0) return false;
 
-      // Brand filter
+      // Brend filtri
       if (currentFilter.brand !== 'all' && product.brand !== currentFilter.brand) {
         return false;
       }
 
-      // Category filter
+      // Kategoriya filtri
       if (currentFilter.category !== 'all' && product.categoryId !== currentFilter.category) {
         return false;
       }
 
-      // Search query
+      // Qidiruv so'zi
       if (currentFilter.search) {
         const titleUz = (product.title?.uz || '').toLowerCase();
         const brand = (product.brand || '').toLowerCase();
         const id = (product.id || '').toLowerCase();
         const desc = (product.description?.uz || '').toLowerCase();
         
-        // Also search in comments/tasks
         const tasksMatch = tasks.some(t => 
           (t.title || '').toLowerCase().includes(currentFilter.search) ||
           (t.comment || '').toLowerCase().includes(currentFilter.search)
@@ -463,7 +472,7 @@
     });
   }
 
-  // Calculate Global Statistics and Detailed Video Breakdown
+  // Asosiy hisobotlar va KPI ko'rsatkichlarini hisoblash
   function updateKPIs() {
     const total = catalog.products.length;
     let countRed = 0;
@@ -498,28 +507,28 @@
       }
     });
 
-    // Update numbers
+    // Ko'rsatkichlarni yangilash
     el.statTotal.textContent = total;
     el.statCoveredProducts.innerHTML = `${coveredProducts} <small>/ ${total}</small>`;
     const coveragePct = total ? ((coveredProducts / total) * 100).toFixed(0) : 0;
-    el.statCoveragePercent.textContent = `${coveragePct}% mahsulotga video bor`;
+    el.statCoveragePercent.textContent = `${coveragePct}% mahsulot qamrab olingan`;
 
     el.statTotalVideos.innerHTML = `${totalVideos} <small>ta video</small>`;
     const avg = coveredProducts > 0 ? (totalVideos / coveredProducts).toFixed(1) : 0;
-    el.statAvgVideos.textContent = coveredProducts > 0 ? `O'rtacha: ${avg} ta video/mahsulot` : 'Hali videolar yo‘q';
+    el.statAvgVideos.textContent = coveredProducts > 0 ? `O‘rtacha: ${avg} ta video/mahsulot` : 'Hozircha videolar yo‘q';
 
     el.statApprovedVideos.innerHTML = `${approvedVideos} <small>ta</small>`;
     el.statPendingVideos.innerHTML = `${pendingVideos} <small>ta</small>`;
     el.statRed.innerHTML = `${countRed} <small>ta</small>`;
 
-    // Tab counts
+    // Tugmalar soni
     el.countAll.textContent = total;
     el.countRed.textContent = countRed;
     el.countYellow.textContent = countYellow;
     el.countBlue.textContent = countBlue;
     el.countApproved.textContent = countWithApproved;
 
-    // Progress bar
+    // Tayyorlik darajasi progressi
     const pctGreen = totalVideos ? ((approvedVideos / totalVideos) * 100).toFixed(1) : 0;
     const pctBlue = total ? ((countBlue / total) * 100).toFixed(1) : 0;
     const pctYellow = total ? ((countYellow / total) * 100).toFixed(1) : 0;
@@ -533,11 +542,11 @@
     el.progressPercent.textContent = `${approvedVideos} ta video mijoz tomonidan tasdiqlangan (${pctGreen}%)`;
   }
 
-  // Render Table & Cards
+  // Jadval va kartalarni render qilish
   function render() {
     updateKPIs();
     const filtered = getFilteredProducts();
-    el.resultsCount.textContent = `${filtered.length} ta mahsulot ko'rsatilmoqda`;
+    el.resultsCount.textContent = `${filtered.length} ta mahsulot ko‘rsatilmoqda`;
 
     if (filtered.length === 0) {
       el.emptyState.hidden = false;
@@ -555,19 +564,23 @@
     }
   }
 
-  // Helper for Category Name
+  // Toifa nomini olish (qat'iy o'zbekcha)
   function getCategoryName(categoryId) {
     const cat = catalog.categories.find(c => c.id === categoryId);
-    return cat ? (cat.name?.uz || cat.name || categoryId) : categoryId;
+    if (!cat) return categoryId;
+    if (cat.name && typeof cat.name === 'object') {
+      return cat.name.uz || Object.values(cat.name)[0] || categoryId;
+    }
+    return cat.name || categoryId;
   }
 
-  // Helper for Image URL
+  // Mahsulot rasm havolasi
   function getImageUrl(relPath) {
     if (!relPath) return 'assets/logo_light.png';
     return relPath;
   }
 
-  // Format Date & Time for display (e.g. "19.10.2026, 23:35")
+  // Sanani o'zbekcha ko'rinishda formatlash (masalan: "19.10.2026, 23:35")
   function formatDateTime(isoStr) {
     if (!isoStr) return '';
     try {
@@ -584,14 +597,14 @@
     }
   }
 
-  // Format for datetime-local input (YYYY-MM-DDTHH:MM)
+  // datetime-local input uchun format (YYYY-MM-DDTHH:MM)
   function toDatetimeLocal(isoStr) {
     const d = isoStr ? new Date(isoStr) : new Date();
     const pad = n => String(n).padStart(2, '0');
     return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
   }
 
-  // Render Table
+  // Jadval ko'rinishini render qilish
   function renderTable(products) {
     el.tableBody.innerHTML = products.map((p, idx) => {
       const adData = getProductAdData(p.id);
@@ -602,9 +615,10 @@
       const approvedCount = tasks.filter(t => t.isApproved).length;
       const pendingCount = tasks.length - approvedCount;
 
-      const titleUz = p.title?.uz || p.id;
+      const titleUz = (p.title && p.title.uz) ? p.title.uz : p.id;
       const categoryName = getCategoryName(p.categoryId);
-      const packagesText = p.packages && p.packages.length ? `${p.packages.join(' / ')} ${p.packageUnit || 'kg'}` : '';
+      const unit = getPackageUnit(p);
+      const packagesText = p.packages && p.packages.length ? `${p.packages.join(' / ')} ${unit}` : '';
 
       const rowClass = `row-status-${status}`;
 
@@ -673,7 +687,7 @@
                   `<span class="badge-approved-mini" style="font-size: 0.68rem;">✅ Tasdiqlangan</span>` : 
                   `<span class="badge-pending-mini" style="font-size: 0.68rem;">⏳ Kutilmoqda</span>`}
               </div>
-            ` : `<span style="color: #94a3b8; font-size: 0.8rem; font-style: italic;">Hali izoh yo'q</span>`}
+            ` : `<span style="color: #94a3b8; font-size: 0.8rem; font-style: italic;">Hali izoh kiritilmagan</span>`}
           </td>
           <td>
             <div class="table-actions">
@@ -685,11 +699,11 @@
                 <span>➕ Ishlar & Izoh</span>
               </button>
               <a 
-                href="https://elementpaint.uz/?product=${encodeURIComponent(p.id)}" 
+                href="https://elementpaint.uz/?lang=uz&product=${encodeURIComponent(p.id)}" 
                 target="_blank" 
                 rel="noopener" 
                 class="btn btn-outline btn-sm"
-                title="Saytda ko'rish"
+                title="Rasmiy saytda ko‘rish (o‘zbek tilida)"
               >
                 <span>↗</span>
               </a>
@@ -700,7 +714,7 @@
     }).join('');
   }
 
-  // Render Cards
+  // Kartalar ko'rinishini render qilish
   function renderCards(products) {
     el.cardsGrid.innerHTML = products.map((p) => {
       const adData = getProductAdData(p.id);
@@ -711,9 +725,10 @@
       const approvedCount = tasks.filter(t => t.isApproved).length;
       const pendingCount = tasks.length - approvedCount;
 
-      const titleUz = p.title?.uz || p.id;
+      const titleUz = (p.title && p.title.uz) ? p.title.uz : p.id;
       const categoryName = getCategoryName(p.categoryId);
-      const packagesText = p.packages && p.packages.length ? `${p.packages.join(' / ')} ${p.packageUnit || 'kg'}` : '';
+      const unit = getPackageUnit(p);
+      const packagesText = p.packages && p.packages.length ? `${p.packages.join(' / ')} ${unit}` : '';
 
       return `
         <article class="product-card card-${status}" data-product-id="${escapeHtml(p.id)}">
@@ -763,7 +778,7 @@
                   <small style="font-size: 0.72rem; color: #94a3b8; font-weight: 600;">🕒 ${formatDateTime(latestTask.createdAt)}</small>
                 </div>
               ` : `
-                <span style="color: #94a3b8; font-style: italic;">Hozircha video qo'shilmagan</span>
+                <span style="color: #94a3b8; font-style: italic;">Hozircha video qo‘shilmagan</span>
               `}
             </div>
           </div>
@@ -777,11 +792,11 @@
               <span>🎬 Ishlar va Videolar (${tasks.length})</span>
             </button>
             <a 
-              href="https://elementpaint.uz/?product=${encodeURIComponent(p.id)}" 
+              href="https://elementpaint.uz/?lang=uz&product=${encodeURIComponent(p.id)}" 
               target="_blank" 
               rel="noopener" 
               class="btn btn-outline btn-sm"
-              title="Rasmiy saytda ko'rish"
+              title="Rasmiy saytda ko‘rish (o‘zbek tilida)"
             >
               <span>↗</span>
             </a>
@@ -791,7 +806,7 @@
     }).join('');
   }
 
-  // Open Modal for Product
+  // Mahsulot modalini ochish
   function openProductModal(productId) {
     const product = catalog.products.find(p => p.id === productId);
     if (!product) return;
@@ -800,24 +815,25 @@
     const adData = getProductAdData(productId);
     const status = adData.status || 'red';
 
-    // Populate header info
+    // Mahsulot ma'lumotlarini o'zbekcha to'ldirish
     el.modalProductImg.src = getImageUrl(product.image);
     el.modalProductImg.onerror = () => { el.modalProductImg.src = `https://elementpaint.uz/${product.image}`; };
-    el.modalProductTitle.textContent = product.title?.uz || product.id;
+    el.modalProductTitle.textContent = (product.title && product.title.uz) ? product.title.uz : product.id;
     
     const categoryName = getCategoryName(product.categoryId);
-    const pack = product.packages ? product.packages.join(' / ') + ' ' + (product.packageUnit || 'kg') : '';
+    const unit = getPackageUnit(product);
+    const pack = product.packages ? product.packages.join(' / ') + ' ' + unit : '';
     el.modalProductMeta.textContent = `${product.brand} · ${categoryName} ${pack ? '· Qadoq: ' + pack : ''}`;
 
-    el.modalSiteLink.href = `https://elementpaint.uz/?product=${encodeURIComponent(product.id)}`;
+    el.modalSiteLink.href = `https://elementpaint.uz/?lang=uz&product=${encodeURIComponent(product.id)}`;
 
-    // Set Radio status
+    // Radio statusni belgilash
     updateModalStatusSelection(status);
 
-    // Reset task form & set default time to now
+    // Formani tozalash va hozirgi vaqtni avtomatik qo'yish
     resetTaskForm();
 
-    // Render tasks list
+    // Videolar ro'yxatini chiqarish
     renderModalTaskList(adData.tasks || []);
 
     if (!el.productModal.open) {
@@ -851,7 +867,7 @@
     editingTaskId = null;
   }
 
-  // Render Tasks List inside Modal
+  // Modal ichidagi videolar ro'yxatini chiqarish
   function renderModalTaskList(tasks) {
     el.modalTaskCount.textContent = tasks.length;
 
@@ -877,7 +893,7 @@
               </span>
               <span class="task-badge-type">${escapeHtml(typeLabel)}</span>
               
-              <!-- Approval Badge -->
+              <!-- Mijoz tasdiqlash holati nishoni -->
               ${isApproved ? `
                 <span class="task-badge-approved">
                   <span>✅</span>
@@ -890,12 +906,12 @@
                 </span>
               `}
 
-              <!-- Exact Timestamp -->
+              <!-- Aniq sana va vaqt -->
               <span class="task-date">🕒 ${formatDateTime(task.createdAt)}</span>
             </div>
             
             <div class="task-item-btns">
-              <!-- Quick Toggle Approval Button -->
+              <!-- Tezkor tasdiqlash tugmasi -->
               <button 
                 type="button" 
                 class="btn-toggle-approval ${isApproved ? 'is-approved' : 'not-approved'}"
@@ -917,9 +933,9 @@
                 type="button" 
                 class="btn-icon-danger" 
                 onclick="window.appDeleteTask('${escapeHtml(task.id)}')"
-                title="Ushbu ishni o'chirish"
+                title="Ushbu ishni o‘chirish"
               >
-                🗑️ O'chirish
+                🗑️ O‘chirish
               </button>
             </div>
           </div>
@@ -940,7 +956,7 @@
               ` : `<span style="font-size: 0.75rem; color: #94a3b8;">Havola kiritilmagan</span>`}
             </div>
 
-            <!-- Quick subtask status change -->
+            <!-- Holatni tez o'zgartirish -->
             <div style="display: flex; align-items: center; gap: 6px;">
               <span style="font-size: 0.76rem; color: #475569; font-weight: 600;">Ish holati:</span>
               <select 
@@ -959,7 +975,7 @@
     }).join('');
   }
 
-  // Handle Task Form Submit
+  // Topshiriq formasini yuborish
   function handleTaskFormSubmit(e) {
     e.preventDefault();
     if (!activeProductId) return;
@@ -977,7 +993,7 @@
     const link = el.taskLinkInput.value.trim();
     const comment = el.taskCommentInput.value.trim();
 
-    // Handling date & time: if left blank, automatically set to exact current time!
+    // Agar sana vaqt kiritilmagan bo'lsa, aynan o'sha payt (hozirgi vaqt) saqlanadi
     let createdAt = el.taskCreatedAtInput.value;
     if (!createdAt) {
       createdAt = new Date().toISOString();
@@ -989,7 +1005,7 @@
     if (!adData.tasks) adData.tasks = [];
 
     if (editingTaskId) {
-      // Edit existing task
+      // Mavjud topshiriqni tahrirlash
       const idx = adData.tasks.findIndex(t => t.id === editingTaskId);
       if (idx !== -1) {
         adData.tasks[idx] = {
@@ -1000,13 +1016,13 @@
           isApproved,
           link,
           comment,
-          createdAt: createdAt, // user modified or kept
+          createdAt: createdAt,
           updatedAt: new Date().toISOString()
         };
-        showToast('Reklama ishi yangilandi!', 'success');
+        showToast('Reklama ishi muvaffaqiyatli yangilandi!', 'success');
       }
     } else {
-      // Create new task
+      // Yangi topshiriq qo'shish
       const newTask = {
         id: 'task_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
         title,
@@ -1019,7 +1035,7 @@
       };
       adData.tasks.unshift(newTask);
 
-      // Auto update product status
+      // Agar video tasdiqlangan bo'lsa yoki tayyorlangan bo'lsa, mahsulotni ko'k qilish
       if (isApproved || status === 'blue') {
         adData.status = 'blue';
         updateModalStatusSelection('blue');
@@ -1047,7 +1063,7 @@
     el.taskLinkInput.value = '';
     el.taskCommentInput.value = '';
     
-    // Set taskCreatedAtInput to current local time by default!
+    // Sukut bo'yicha aynan hozirgi sana va vaqt qo'yiladi
     el.taskCreatedAtInput.value = toDatetimeLocal(new Date().toISOString());
 
     el.taskFormTitle.innerHTML = '<span>➕</span> Yangi Video / Reklama Ishi Qo‘shish';
@@ -1095,7 +1111,7 @@
     render();
   }
 
-  // Toggle Approval directly from card
+  // Mijoz tasdiqlashini 1-bosishda o'zgartirish
   function toggleTaskApproval(taskId) {
     if (!activeProductId) return;
     const adData = getProductAdData(activeProductId);
@@ -1123,23 +1139,24 @@
 
     task.status = newStatus;
     saveAdStore();
-    showToast(`Video holati: "${STATUS_CONFIG[newStatus].label}" ga o'zgartirildi`, 'info');
+    showToast(`Video holati: «${STATUS_CONFIG[newStatus].label}» ga o‘zgartirildi`, 'info');
     renderModalTaskList(adData.tasks);
     render();
   }
 
-  // Quick Status change from Table or Card dropdown
+  // Tezkor holatni o'zgartirish
   function changeQuickStatus(productId, newStatus) {
     setProductStatus(productId, newStatus);
     render();
-    showToast(`Holat: "${STATUS_CONFIG[newStatus].label}" ga o'zgartirildi`, 'info');
+    showToast(`Holat: «${STATUS_CONFIG[newStatus].label}» ga o‘zgartirildi`, 'info');
   }
 
-  // Export JSON (Backup)
+  // JSON Zaxira yuklab olish
   function exportJson() {
     const backupData = {
       version: 2,
-      exportedAt: new Date().toISOString(),
+      til: 'uz',
+      eksportVaqti: new Date().toISOString(),
       adStore: adStore
     };
 
@@ -1147,16 +1164,16 @@
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `elementpaint_reklama_baza_${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `elementpaint_reklama_zaxira_${new Date().toISOString().slice(0, 10)}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    showToast('Barcha reklama ma’lumotlari JSON faylga yuklab olindi!', 'success');
+    showToast('Barcha reklama maʼlumotlari zaxira faylga saqlandi!', 'success');
   }
 
-  // Import JSON (Restore)
+  // JSON Zaxirani tiklash
   function importJson(e) {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
@@ -1176,26 +1193,27 @@
           render();
           showToast('Zaxira nusxa muvaffaqiyatli tiklandi!', 'success');
         } else {
-          alert('Fayl formati noto‘g‘ri yoki mos kelmaydi!');
+          alert('Fayl formati mos kelmadi yoki xatolik mavjud!');
         }
       } catch (err) {
-        alert('Faylni o‘qishda xatolik: ' + err.message);
+        alert('Faylni o‘qishda xatolik yuz berdi: ' + err.message);
       }
       el.fileImportInput.value = '';
     };
     reader.readAsText(file);
   }
 
-  // Export CSV (Excel format with UTF-8 BOM)
+  // Excel / CSV Hisobotini o'zbekcha sarlavhalar bilan eksport qilish
   function exportCsv() {
-    let csv = '\uFEFF'; // UTF-8 BOM for Excel
-    csv += '№;Mahsulot Nomi;Brend;Kategoriya;Qadoq;Reklama Holati;Jami Videolar;Tasdiqlangan Videolar;Tasdiqlanmagan Videolar;Videolar Tafsiloti;Izohlar\n';
+    let csv = '\uFEFF'; // Excel uchun UTF-8 BOM
+    csv += '№;Mahsulot Nomi;Brend;Toifa (Kategoriya);Qadoq;Reklama Holati;Jami Videolar;Mijoz Tasdiqlagan Videolar;Tasdiqlanmagan Videolar;Videolar Tafsiloti;Izohlar\n';
 
     catalog.products.forEach((p, idx) => {
       const adData = getProductAdData(p.id);
       const statusLabel = STATUS_CONFIG[adData.status || 'red'].label;
       const categoryName = getCategoryName(p.categoryId);
-      const pack = p.packages ? p.packages.join(' / ') + ' ' + (p.packageUnit || 'kg') : '';
+      const unit = getPackageUnit(p);
+      const pack = p.packages ? p.packages.join(' / ') + ' ' + unit : '';
       const tasks = adData.tasks || [];
       
       const approvedCount = tasks.filter(t => t.isApproved).length;
@@ -1210,7 +1228,7 @@
 
       const row = [
         idx + 1,
-        `"${(p.title?.uz || p.id).replace(/"/g, '""')}"`,
+        `"${((p.title && p.title.uz) ? p.title.uz : p.id).replace(/"/g, '""')}"`,
         `"${(p.brand || '').replace(/"/g, '""')}"`,
         `"${categoryName.replace(/"/g, '""')}"`,
         `"${pack.replace(/"/g, '""')}"`,
@@ -1235,10 +1253,10 @@
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    showToast('Excel/CSV hisoboti muvaffaqiyatli yuklandi!', 'success');
+    showToast('Excel/CSV hisoboti muvaffaqiyatli yuklab olindi!', 'success');
   }
 
-  // Toast Notification
+  // Bildirishnoma (Toast)
   function showToast(message, type = 'info') {
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
@@ -1258,7 +1276,7 @@
     }, 3200);
   }
 
-  // Helper: Escape HTML
+  // HTML belgilarni xavfsiz qilish
   function escapeHtml(str) {
     if (str === null || str === undefined) return '';
     return String(str)
@@ -1269,7 +1287,7 @@
       .replace(/'/g, '&#039;');
   }
 
-  // Expose global window hooks for inline handlers
+  // Global funksiyalarni ulash
   window.appOpenProduct = openProductModal;
   window.appChangeQuickStatus = changeQuickStatus;
   window.appEditTask = editTask;
@@ -1277,7 +1295,7 @@
   window.appToggleTaskApproval = toggleTaskApproval;
   window.appChangeTaskStatus = changeTaskStatus;
 
-  // Run on load
+  // Yuklanganda ishga tushirish
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

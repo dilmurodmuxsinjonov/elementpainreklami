@@ -1,0 +1,2531 @@
+window.CATALOG_DATA = {
+  "schemaVersion": 1,
+  "version": 74,
+  "generatedAt": "2026-10-19T18:10:44+00:00",
+  "products": [
+    {
+      "id": "berlak-white",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "BERLAK",
+      "title": {
+        "uz": "Berlak PF-115 — qordek oq",
+        "ru": "Berlak ПФ-115 — белоснежная",
+        "en": "Berlak PF-115 — snow white"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-001.png",
+      "originalImage": null,
+      "packages": [
+        3
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "berlak-white",
+      "variantId": "",
+      "sourceStatus": "admin",
+      "catalogNumber": 1,
+      "sku": "EP-001"
+    },
+    {
+      "id": "berlak-universal-white",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "BERLAK",
+      "title": {
+        "uz": "Universal oq emal",
+        "ru": "Универсальная эмаль — белая",
+        "en": "Universal enamel — white"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-002.png",
+      "originalImage": null,
+      "packages": [
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "berlak-universal-white",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 2,
+      "sku": "EP-002"
+    },
+    {
+      "id": "berlak-floor",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "BERLAK",
+      "title": {
+        "uz": "Berlak pol emali",
+        "ru": "Эмаль для пола Berlak",
+        "en": "Berlak floor enamel"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-003.png",
+      "originalImage": null,
+      "packages": [
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "berlak-floor",
+      "variantId": "",
+      "sourceStatus": "admin",
+      "catalogNumber": 3,
+      "sku": "EP-003"
+    },
+    {
+      "id": "berlak-travertin",
+      "aliases": [],
+      "categoryId": "travertin",
+      "brand": "BERLAK",
+      "title": {
+        "uz": "Berlak suyuq travertin",
+        "ru": "Жидкий травертин Berlak",
+        "en": "Berlak liquid travertine"
+      },
+      "description": {
+        "uz": "Devorlarda tabiiy tosh ko‘rinishini hosil qiluvchi qoplama.",
+        "ru": "Покрытие для стен с фактурой натурального камня.",
+        "en": "A wall coating with a natural stone texture."
+      },
+      "image": "assets/catalog-2026/product-004.png",
+      "originalImage": null,
+      "packages": [
+        5,
+        10,
+        15
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "berlak-travertin",
+      "variantId": "",
+      "sourceStatus": "admin",
+      "catalogNumber": 4,
+      "sku": "EP-004"
+    },
+    {
+      "id": "berlak-facade",
+      "aliases": [],
+      "categoryId": "water",
+      "brand": "BERLAK",
+      "title": {
+        "uz": "Akril fasad bo‘yog‘i",
+        "ru": "Акриловая фасадная краска",
+        "en": "Acrylic facade paint"
+      },
+      "description": {
+        "uz": "Devor yuzalari uchun suv asosidagi bo‘yoq.",
+        "ru": "Краска на водной основе для стен.",
+        "en": "A water-based paint for wall surfaces."
+      },
+      "image": "assets/catalog-2026/product-005.png",
+      "originalImage": null,
+      "packages": [
+        4,
+        9,
+        14,
+        18,
+        20
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "berlak-facade",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 5,
+      "sku": "EP-005"
+    },
+    {
+      "id": "berlak-interior",
+      "aliases": [],
+      "categoryId": "water",
+      "brand": "BERLAK",
+      "title": {
+        "uz": "Akril interyer bo‘yog‘i",
+        "ru": "Акриловая краска для интерьера",
+        "en": "Acrylic interior paint"
+      },
+      "description": {
+        "uz": "Devor yuzalari uchun suv asosidagi bo‘yoq.",
+        "ru": "Краска на водной основе для стен.",
+        "en": "A water-based paint for wall surfaces."
+      },
+      "image": "assets/catalog-2026/product-006.png",
+      "originalImage": null,
+      "packages": [
+        4,
+        9,
+        14,
+        18,
+        20
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "berlak-interior",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 6,
+      "sku": "EP-006"
+    },
+    {
+      "id": "berlak-wallpaper-glue",
+      "aliases": [],
+      "categoryId": "adhesive",
+      "brand": "BERLAK",
+      "title": {
+        "uz": "Universal gulqog‘oz yelimi",
+        "ru": "Универсальный клей для обоев",
+        "en": "Universal wallpaper adhesive"
+      },
+      "description": {
+        "uz": "Gulqog‘oz yopishtirish uchun yelim.",
+        "ru": "Клей для обоев.",
+        "en": "Adhesive for wallpaper."
+      },
+      "image": "assets/catalog-2026/product-007.png",
+      "originalImage": null,
+      "packages": [
+        0.2,
+        0.5,
+        1
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "berlak-wallpaper-glue",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 7,
+      "sku": "EP-007"
+    },
+    {
+      "id": "berlak-primer-2kg",
+      "aliases": [],
+      "categoryId": "primer",
+      "brand": "BERLAK",
+      "title": {
+        "uz": "Akril astar — 2,5 kg",
+        "ru": "Акриловая грунтовка — 2,5 кг",
+        "en": "Acrylic primer — 2.5 kg"
+      },
+      "description": {
+        "uz": "Bo‘yashdan avval yuzani tayyorlash uchun akril astar.",
+        "ru": "Акриловая грунтовка для подготовки поверхности перед окрашиванием.",
+        "en": "An acrylic primer for preparing surfaces before painting."
+      },
+      "image": "assets/catalog-2026/product-008.png",
+      "originalImage": null,
+      "packages": [
+        2.5
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "berlak-primer-2kg",
+      "variantId": "",
+      "sourceStatus": "admin",
+      "catalogNumber": 8,
+      "sku": "EP-008"
+    },
+    {
+      "id": "berlak-ottocento",
+      "aliases": [],
+      "categoryId": "ottocento",
+      "brand": "BERLAK",
+      "title": {
+        "uz": "Ottocento — ipak va baxmal",
+        "ru": "Отточенто — шёлк и бархат",
+        "en": "Ottocento — silk and velvet"
+      },
+      "description": {
+        "uz": "Ipak va baxmal ko‘rinishidagi dekorativ devor qoplamasi.",
+        "ru": "Декоративное покрытие стен с эффектом шёлка и бархата.",
+        "en": "A decorative wall finish with a silk and velvet appearance."
+      },
+      "image": "assets/catalog-2026/product-009.png",
+      "originalImage": null,
+      "packages": [
+        3,
+        5,
+        15
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "berlak-ottocento",
+      "variantId": "",
+      "sourceStatus": "admin",
+      "catalogNumber": 9,
+      "sku": "EP-009"
+    },
+    {
+      "id": "berlak-pearl",
+      "aliases": [],
+      "categoryId": "lak",
+      "brand": "BERLAK",
+      "title": {
+        "uz": "Marvarid tusli lak",
+        "ru": "Лак с перламутровым эффектом",
+        "en": "Pearl-effect varnish"
+      },
+      "description": {
+        "uz": "Yuzaga yakuniy qoplama berish uchun lak. Qaysi yuzaga ishlatishingizga qarab tanlang.",
+        "ru": "Лак для финишного покрытия. Выбирайте с учётом поверхности.",
+        "en": "A varnish for the final coat. Choose one suited to your surface."
+      },
+      "image": "assets/catalog-2026/product-010.png",
+      "originalImage": null,
+      "packages": [
+        5,
+        10
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "berlak-pearl",
+      "variantId": "",
+      "sourceStatus": "admin",
+      "catalogNumber": 10,
+      "sku": "EP-010"
+    },
+    {
+      "id": "berlak-travertin-lak",
+      "aliases": [],
+      "categoryId": "lak",
+      "brand": "BERLAK",
+      "title": {
+        "uz": "Travertin uchun lak",
+        "ru": "Лак для травертина",
+        "en": "Travertine varnish"
+      },
+      "description": {
+        "uz": "Yuzaga yakuniy qoplama berish uchun lak. Qaysi yuzaga ishlatishingizga qarab tanlang.",
+        "ru": "Лак для финишного покрытия. Выбирайте с учётом поверхности.",
+        "en": "A varnish for the final coat. Choose one suited to your surface."
+      },
+      "image": "assets/catalog-2026/product-011.png",
+      "originalImage": null,
+      "packages": [
+        5,
+        10,
+        15
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "berlak-travertin-lak",
+      "variantId": "",
+      "sourceStatus": "admin",
+      "catalogNumber": 11,
+      "sku": "EP-011"
+    },
+    {
+      "id": "berlak-wallpaper",
+      "aliases": [],
+      "categoryId": "wallpaper",
+      "brand": "BERLAK",
+      "title": {
+        "uz": "Fantasy suyuq gulqog‘oz",
+        "ru": "Жидкие обои Fantasy",
+        "en": "Fantasy liquid wallpaper"
+      },
+      "description": {
+        "uz": "Ichki devorlar uchun suyuq gulqog‘oz.",
+        "ru": "Жидкие обои для внутренних стен.",
+        "en": "Liquid wallpaper for interior walls."
+      },
+      "image": "assets/catalog-2026/product-012.png",
+      "originalImage": null,
+      "packages": [
+        3,
+        4
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "berlak-wallpaper",
+      "variantId": "",
+      "sourceStatus": "admin",
+      "catalogNumber": 12,
+      "sku": "EP-012"
+    },
+    {
+      "id": "atlas-pf115",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "PF-115 yaltiroq emal — Qordek oq",
+        "ru": "Глянцевая эмаль ПФ-115 — Белоснежный",
+        "en": "PF-115 gloss enamel — Snow white"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-013.png",
+      "originalImage": "assets/catalog-2026/product-013.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Qordek oq",
+        "ru": "Белоснежный",
+        "en": "Snow white"
+      },
+      "color": "#F5F4EB",
+      "familyId": "atlas-pf115",
+      "variantId": "white",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 13,
+      "sku": "EP-013"
+    },
+    {
+      "id": "atlas-pf115-dark-red",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "PF-115 yaltiroq emal — To‘q qizil",
+        "ru": "Глянцевая эмаль ПФ-115 — Бордовый",
+        "en": "PF-115 gloss enamel — Dark red"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-014.png",
+      "originalImage": "assets/catalog-2026/product-014.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "To‘q qizil",
+        "ru": "Бордовый",
+        "en": "Dark red"
+      },
+      "color": "#A82B2D",
+      "familyId": "atlas-pf115",
+      "variantId": "dark-red",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 14,
+      "sku": "EP-014"
+    },
+    {
+      "id": "atlas-pf115-asphalt",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "PF-115 yaltiroq emal — Ho‘l asfalt",
+        "ru": "Глянцевая эмаль ПФ-115 — Мокрый асфальт",
+        "en": "PF-115 gloss enamel — Wet asphalt"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-015.png",
+      "originalImage": "assets/catalog-2026/product-015.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Ho‘l asfalt",
+        "ru": "Мокрый асфальт",
+        "en": "Wet asphalt"
+      },
+      "color": "#4B5554",
+      "familyId": "atlas-pf115",
+      "variantId": "asphalt",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 15,
+      "sku": "EP-015"
+    },
+    {
+      "id": "atlas-pf266",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "PF-266 pol emali",
+        "ru": "Эмаль для пола ПФ-266",
+        "en": "PF-266 floor enamel"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-016.png",
+      "originalImage": null,
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "atlas-pf266",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 16,
+      "sku": "EP-016"
+    },
+    {
+      "id": "berlak-primer-5kg",
+      "aliases": [],
+      "categoryId": "primer",
+      "brand": "BERLAK",
+      "title": {
+        "uz": "Akril astar 1/7 — kanistr",
+        "ru": "Акриловая грунтовка 1/7 — канистра",
+        "en": "Acrylic primer 1/7 — canister"
+      },
+      "description": {
+        "uz": "Bo‘yashdan avval yuzani tayyorlash uchun akril astar.",
+        "ru": "Акриловая грунтовка для подготовки поверхности перед окрашиванием.",
+        "en": "An acrylic primer for preparing surfaces before painting."
+      },
+      "image": "assets/catalog-2026/product-017.png",
+      "originalImage": null,
+      "packages": [
+        2.8,
+        5
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "berlak-primer-5kg",
+      "variantId": "",
+      "sourceStatus": "admin",
+      "catalogNumber": 17,
+      "sku": "EP-017"
+    },
+    {
+      "id": "atlas-primer",
+      "aliases": [],
+      "categoryId": "primer",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "Akril astar 1/7",
+        "ru": "Акриловая грунтовка 1/7",
+        "en": "Acrylic primer 1/7"
+      },
+      "description": {
+        "uz": "Bo‘yashdan avval yuzani tayyorlash uchun akril astar.",
+        "ru": "Акриловая грунтовка для подготовки поверхности перед окрашиванием.",
+        "en": "An acrylic primer for preparing surfaces before painting."
+      },
+      "image": "assets/atlas_primer_legacy_red-2021.jpg",
+      "originalImage": "assets/catalog-2026/product-018.png",
+      "packages": [
+        2.8,
+        5
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "atlas-primer",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 18,
+      "sku": "EP-018"
+    },
+    {
+      "id": "atlas-white",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "Emal Standart — oq",
+        "ru": "Эмаль Стандарт — белая",
+        "en": "Standard enamel — white"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-019.png",
+      "originalImage": null,
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "atlas-white",
+      "variantId": "",
+      "sourceStatus": "admin",
+      "catalogNumber": 19,
+      "sku": "EP-019"
+    },
+    {
+      "id": "atlas-pf115-grey",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "PF-115 yaltiroq emal — Kulrang",
+        "ru": "Глянцевая эмаль ПФ-115 — Серый",
+        "en": "PF-115 gloss enamel — Grey"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-020.png",
+      "originalImage": "assets/catalog-2026/product-020.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Kulrang",
+        "ru": "Серый",
+        "en": "Grey"
+      },
+      "color": "#818280",
+      "familyId": "atlas-pf115",
+      "variantId": "grey",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 20,
+      "sku": "EP-020"
+    },
+    {
+      "id": "atlas-pf115-brown",
+      "aliases": [
+        "atlas-brown"
+      ],
+      "categoryId": "emal",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "PF-115 yaltiroq emal — Shokolad jigarrang",
+        "ru": "Глянцевая эмаль ПФ-115 — Шоколадно-коричневый",
+        "en": "PF-115 gloss enamel — Chocolate brown"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-021.png",
+      "originalImage": "assets/catalog-2026/product-021.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Shokolad jigarrang",
+        "ru": "Шоколадно-коричневый",
+        "en": "Chocolate brown"
+      },
+      "color": "#5D3025",
+      "familyId": "atlas-pf115",
+      "variantId": "brown",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 21,
+      "sku": "EP-021"
+    },
+    {
+      "id": "atlas-pf115-blue",
+      "aliases": [
+        "atlas-blue"
+      ],
+      "categoryId": "emal",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "PF-115 yaltiroq emal — Havorang",
+        "ru": "Глянцевая эмаль ПФ-115 — Голубой",
+        "en": "PF-115 gloss enamel — Blue"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-022.png",
+      "originalImage": "assets/catalog-2026/product-022.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Havorang",
+        "ru": "Голубой",
+        "en": "Blue"
+      },
+      "color": "#149CD0",
+      "familyId": "atlas-pf115",
+      "variantId": "blue",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 22,
+      "sku": "EP-022"
+    },
+    {
+      "id": "atlas-pf115-red",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "PF-115 yaltiroq emal — Qizil",
+        "ru": "Глянцевая эмаль ПФ-115 — Красный",
+        "en": "PF-115 gloss enamel — Red"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-023.png",
+      "originalImage": "assets/catalog-2026/product-023.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Qizil",
+        "ru": "Красный",
+        "en": "Red"
+      },
+      "color": "#CB3428",
+      "familyId": "atlas-pf115",
+      "variantId": "red",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 23,
+      "sku": "EP-023"
+    },
+    {
+      "id": "atlas-pf115-dark-blue",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "PF-115 yaltiroq emal — To‘q ko‘k",
+        "ru": "Глянцевая эмаль ПФ-115 — Тёмно-синий",
+        "en": "PF-115 gloss enamel — Dark blue"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-024.png",
+      "originalImage": "assets/catalog-2026/product-024.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "To‘q ko‘k",
+        "ru": "Тёмно-синий",
+        "en": "Dark blue"
+      },
+      "color": "#24468D",
+      "familyId": "atlas-pf115",
+      "variantId": "dark-blue",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 24,
+      "sku": "EP-024"
+    },
+    {
+      "id": "atlas-pf115-black",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "PF-115 yaltiroq emal — Qora",
+        "ru": "Глянцевая эмаль ПФ-115 — Чёрный",
+        "en": "PF-115 gloss enamel — Black"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-025.png",
+      "originalImage": "assets/catalog-2026/product-025.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Qora",
+        "ru": "Чёрный",
+        "en": "Black"
+      },
+      "color": "#272C2A",
+      "familyId": "atlas-pf115",
+      "variantId": "black",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 25,
+      "sku": "EP-025"
+    },
+    {
+      "id": "atlas-pf115-yellow",
+      "aliases": [
+        "atlas-yellow"
+      ],
+      "categoryId": "emal",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "PF-115 yaltiroq emal — Sariq",
+        "ru": "Глянцевая эмаль ПФ-115 — Жёлтый",
+        "en": "PF-115 gloss enamel — Yellow"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-026.png",
+      "originalImage": "assets/catalog-2026/product-026.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Sariq",
+        "ru": "Жёлтый",
+        "en": "Yellow"
+      },
+      "color": "#E5C42C",
+      "familyId": "atlas-pf115",
+      "variantId": "yellow",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 26,
+      "sku": "EP-026"
+    },
+    {
+      "id": "atlas-pf115-green",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "PF-115 yaltiroq emal — Yashil",
+        "ru": "Глянцевая эмаль ПФ-115 — Зелёный",
+        "en": "PF-115 gloss enamel — Green"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-027.png",
+      "originalImage": "assets/catalog-2026/product-027.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Yashil",
+        "ru": "Зелёный",
+        "en": "Green"
+      },
+      "color": "#188549",
+      "familyId": "atlas-pf115",
+      "variantId": "green",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 27,
+      "sku": "EP-027"
+    },
+    {
+      "id": "atlas-pf283",
+      "aliases": [],
+      "categoryId": "lak",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "PF-283 yaltiroq lak",
+        "ru": "Глянцевый лак ПФ-283",
+        "en": "PF-283 gloss varnish"
+      },
+      "description": {
+        "uz": "Yuzaga yakuniy qoplama berish uchun lak. Qaysi yuzaga ishlatishingizga qarab tanlang.",
+        "ru": "Лак для финишного покрытия. Выбирайте с учётом поверхности.",
+        "en": "A varnish for the final coat. Choose one suited to your surface."
+      },
+      "image": "assets/catalog-2026/product-028.png",
+      "originalImage": null,
+      "packages": [
+        0.8,
+        2.2
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "atlas-pf283",
+      "variantId": "",
+      "sourceStatus": "admin",
+      "catalogNumber": 28,
+      "sku": "EP-028"
+    },
+    {
+      "id": "atlas-yacht-lacquer",
+      "aliases": [],
+      "categoryId": "lak",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "Suvga chidamli yaxta laki",
+        "ru": "Водостойкий яхтный лак",
+        "en": "Water-resistant yacht lacquer"
+      },
+      "description": {
+        "uz": "Yuzaga yakuniy qoplama berish uchun lak. Qaysi yuzaga ishlatishingizga qarab tanlang.",
+        "ru": "Лак для финишного покрытия. Выбирайте с учётом поверхности.",
+        "en": "A varnish for the final coat. Choose one suited to your surface."
+      },
+      "image": "assets/catalog-2026/product-029.png",
+      "originalImage": null,
+      "packages": [
+        0.8,
+        2.2
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "atlas-yacht-lacquer",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 29,
+      "sku": "EP-029"
+    },
+    {
+      "id": "atlas-pva",
+      "aliases": [],
+      "categoryId": "pva",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "801 PVA yelimi",
+        "ru": "Клей ПВА 801",
+        "en": "801 PVA adhesive"
+      },
+      "description": {
+        "uz": "Yog‘och, qog‘oz va qurilish ishlari uchun PVA yelimi.",
+        "ru": "Клей ПВА для дерева, бумаги и строительных работ.",
+        "en": "PVA adhesive for wood, paper and construction work."
+      },
+      "image": "assets/catalog-2026/product-030.png",
+      "originalImage": null,
+      "packages": [
+        0.8
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "atlas-pva",
+      "variantId": "",
+      "sourceStatus": "admin",
+      "catalogNumber": 30,
+      "sku": "EP-030"
+    },
+    {
+      "id": "atlas-interior",
+      "aliases": [],
+      "categoryId": "water",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "Akril interyer bo‘yog‘i",
+        "ru": "Акриловая краска для интерьера",
+        "en": "Acrylic interior paint"
+      },
+      "description": {
+        "uz": "Devor yuzalari uchun suv asosidagi bo‘yoq.",
+        "ru": "Краска на водной основе для стен.",
+        "en": "A water-based paint for wall surfaces."
+      },
+      "image": "assets/catalog-2026/product-031.png",
+      "originalImage": null,
+      "packages": [
+        18,
+        20
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "atlas-interior",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 31,
+      "sku": "EP-031"
+    },
+    {
+      "id": "atlas-facade",
+      "aliases": [],
+      "categoryId": "water",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "Akril fasad bo‘yog‘i",
+        "ru": "Акриловая фасадная краска",
+        "en": "Acrylic facade paint"
+      },
+      "description": {
+        "uz": "Devor yuzalari uchun suv asosidagi bo‘yoq.",
+        "ru": "Краска на водной основе для стен.",
+        "en": "A water-based paint for wall surfaces."
+      },
+      "image": "assets/catalog-2026/product-032.png",
+      "originalImage": null,
+      "packages": [
+        18,
+        20
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "atlas-facade",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 32,
+      "sku": "EP-032"
+    },
+    {
+      "id": "atlas-facade-washable",
+      "aliases": [],
+      "categoryId": "water",
+      "brand": "ATLAS",
+      "title": {
+        "uz": "Yuviladigan fasad bo‘yog‘i",
+        "ru": "Моющаяся фасадная краска",
+        "en": "Washable facade paint"
+      },
+      "description": {
+        "uz": "Devor yuzalari uchun suv asosidagi bo‘yoq.",
+        "ru": "Краска на водной основе для стен.",
+        "en": "A water-based paint for wall surfaces."
+      },
+      "image": "assets/catalog-2026/product-033.png",
+      "originalImage": null,
+      "packages": [
+        18,
+        20
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "atlas-facade-washable",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 33,
+      "sku": "EP-033"
+    },
+    {
+      "id": "artek-improved",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Improved yaltiroq emal — Oq",
+        "ru": "Глянцевая эмаль Improved — Белая",
+        "en": "Improved gloss enamel — White"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-034.png",
+      "originalImage": "assets/catalog-2026/product-034.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Oq",
+        "ru": "Белая",
+        "en": "White"
+      },
+      "color": "#F5F4EB",
+      "familyId": "artek-improved",
+      "variantId": "white",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 34,
+      "sku": "EP-034"
+    },
+    {
+      "id": "artek-improved-asphalt",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Improved yaltiroq emal — Ho‘l asfalt",
+        "ru": "Глянцевая эмаль Improved — Мокрый асфальт",
+        "en": "Improved gloss enamel — Wet asphalt"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-035.png",
+      "originalImage": "assets/catalog-2026/product-035.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Ho‘l asfalt",
+        "ru": "Мокрый асфальт",
+        "en": "Wet asphalt"
+      },
+      "color": "#59605F",
+      "familyId": "artek-improved",
+      "variantId": "asphalt",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 35,
+      "sku": "EP-035"
+    },
+    {
+      "id": "artek-improved-claret",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Improved yaltiroq emal — To‘q qizil",
+        "ru": "Глянцевая эмаль Improved — Бордовая",
+        "en": "Improved gloss enamel — Claret red"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-036.png",
+      "originalImage": "assets/catalog-2026/product-036.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "To‘q qizil",
+        "ru": "Бордовая",
+        "en": "Claret red"
+      },
+      "color": "#C84237",
+      "familyId": "artek-improved",
+      "variantId": "claret",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 36,
+      "sku": "EP-036"
+    },
+    {
+      "id": "artek-floor-improved",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Improved pol emali",
+        "ru": "Эмаль Improved для пола",
+        "en": "Improved floor enamel"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-037.png",
+      "originalImage": null,
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "artek-floor-improved",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 37,
+      "sku": "EP-037"
+    },
+    {
+      "id": "artek-improved-chocolate",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Improved yaltiroq emal — Shokolad jigarrang",
+        "ru": "Глянцевая эмаль Improved — Шоколадная",
+        "en": "Improved gloss enamel — Chocolate"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-038.png",
+      "originalImage": "assets/catalog-2026/product-038.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Shokolad jigarrang",
+        "ru": "Шоколадная",
+        "en": "Chocolate"
+      },
+      "color": "#693E2A",
+      "familyId": "artek-improved",
+      "variantId": "chocolate",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 38,
+      "sku": "EP-038"
+    },
+    {
+      "id": "artek-improved-green",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Improved yaltiroq emal — Yashil",
+        "ru": "Глянцевая эмаль Improved — Зелёная",
+        "en": "Improved gloss enamel — Green"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-039.png",
+      "originalImage": "assets/catalog-2026/product-039.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Yashil",
+        "ru": "Зелёная",
+        "en": "Green"
+      },
+      "color": "#168A42",
+      "familyId": "artek-improved",
+      "variantId": "green",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 39,
+      "sku": "EP-039"
+    },
+    {
+      "id": "artek-improved-black",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Improved yaltiroq emal — Qora",
+        "ru": "Глянцевая эмаль Improved — Чёрная",
+        "en": "Improved gloss enamel — Black"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-040.png",
+      "originalImage": "assets/catalog-2026/product-040.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Qora",
+        "ru": "Чёрная",
+        "en": "Black"
+      },
+      "color": "#171717",
+      "familyId": "artek-improved",
+      "variantId": "black",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 40,
+      "sku": "EP-040"
+    },
+    {
+      "id": "artek-improved-yellow",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Improved yaltiroq emal — Sariq",
+        "ru": "Глянцевая эмаль Improved — Жёлтая",
+        "en": "Improved gloss enamel — Yellow"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-041.png",
+      "originalImage": "assets/catalog-2026/product-041.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Sariq",
+        "ru": "Жёлтая",
+        "en": "Yellow"
+      },
+      "color": "#DBB56B",
+      "familyId": "artek-improved",
+      "variantId": "yellow",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 41,
+      "sku": "EP-041"
+    },
+    {
+      "id": "artek-improved-red",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Improved yaltiroq emal — Qizil",
+        "ru": "Глянцевая эмаль Improved — Красная",
+        "en": "Improved gloss enamel — Red"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-042.png",
+      "originalImage": "assets/catalog-2026/product-042.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Qizil",
+        "ru": "Красная",
+        "en": "Red"
+      },
+      "color": "#E43C30",
+      "familyId": "artek-improved",
+      "variantId": "red",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 42,
+      "sku": "EP-042"
+    },
+    {
+      "id": "artek-improved-grey",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Improved yaltiroq emal — Kulrang",
+        "ru": "Глянцевая эмаль Improved — Серая",
+        "en": "Improved gloss enamel — Grey"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-043.png",
+      "originalImage": "assets/catalog-2026/product-043.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Kulrang",
+        "ru": "Серая",
+        "en": "Grey"
+      },
+      "color": "#7C8081",
+      "familyId": "artek-improved",
+      "variantId": "grey",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 43,
+      "sku": "EP-043"
+    },
+    {
+      "id": "artek-improved-blue",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Improved yaltiroq emal — Havorang",
+        "ru": "Глянцевая эмаль Improved — Голубая",
+        "en": "Improved gloss enamel — Blue"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-044.png",
+      "originalImage": "assets/catalog-2026/product-044.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Havorang",
+        "ru": "Голубая",
+        "en": "Blue"
+      },
+      "color": "#12A7D6",
+      "familyId": "artek-improved",
+      "variantId": "blue",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 44,
+      "sku": "EP-044"
+    },
+    {
+      "id": "artek-improved-dark-blue",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Improved yaltiroq emal — To‘q ko‘k",
+        "ru": "Глянцевая эмаль Improved — Тёмно-синяя",
+        "en": "Improved gloss enamel — Dark blue"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-045.png",
+      "originalImage": "assets/catalog-2026/product-045.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "To‘q ko‘k",
+        "ru": "Тёмно-синяя",
+        "en": "Dark blue"
+      },
+      "color": "#1B4692",
+      "familyId": "artek-improved",
+      "variantId": "dark-blue",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 45,
+      "sku": "EP-045"
+    },
+    {
+      "id": "artek-improved-dark-red",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Improved yaltiroq emal — Qizg‘ish jigarrang",
+        "ru": "Глянцевая эмаль Improved — Красно-коричневая",
+        "en": "Improved gloss enamel — Reddish brown"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-046.png",
+      "originalImage": "assets/catalog-2026/product-046.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Qizg‘ish jigarrang",
+        "ru": "Красно-коричневая",
+        "en": "Reddish brown"
+      },
+      "color": "#8E1724",
+      "familyId": "artek-improved",
+      "variantId": "dark-red",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 46,
+      "sku": "EP-046"
+    },
+    {
+      "id": "artek-universal",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Universal emal — Sariq",
+        "ru": "Универсальная эмаль — Жёлтая",
+        "en": "Universal enamel — Yellow"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-047.png",
+      "originalImage": "assets/catalog-2026/product-047.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Sariq",
+        "ru": "Жёлтая",
+        "en": "Yellow"
+      },
+      "color": "#DBB56B",
+      "familyId": "artek-universal",
+      "variantId": "yellow",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 47,
+      "sku": "EP-047"
+    },
+    {
+      "id": "artek-floor-universal",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Universal pol emali",
+        "ru": "Универсальная эмаль для пола",
+        "en": "Universal floor enamel"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-048.png",
+      "originalImage": null,
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "artek-floor-universal",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 48,
+      "sku": "EP-048"
+    },
+    {
+      "id": "artek-universal-grey",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Universal emal — Kulrang",
+        "ru": "Универсальная эмаль — Серая",
+        "en": "Universal enamel — Grey"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-049.png",
+      "originalImage": "assets/catalog-2026/product-049.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Kulrang",
+        "ru": "Серая",
+        "en": "Grey"
+      },
+      "color": "#7C8081",
+      "familyId": "artek-universal",
+      "variantId": "grey",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 49,
+      "sku": "EP-049"
+    },
+    {
+      "id": "artek-universal-dark-blue",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Universal emal — To‘q ko‘k",
+        "ru": "Универсальная эмаль — Тёмно-синяя",
+        "en": "Universal enamel — Dark blue"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-050.png",
+      "originalImage": "assets/catalog-2026/product-050.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "To‘q ko‘k",
+        "ru": "Тёмно-синяя",
+        "en": "Dark blue"
+      },
+      "color": "#1B4692",
+      "familyId": "artek-universal",
+      "variantId": "dark-blue",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 50,
+      "sku": "EP-050"
+    },
+    {
+      "id": "artek-universal-asphalt",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Universal emal — Ho‘l asfalt",
+        "ru": "Универсальная эмаль — Мокрый асфальт",
+        "en": "Universal enamel — Wet asphalt"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-051.png",
+      "originalImage": "assets/catalog-2026/product-051.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Ho‘l asfalt",
+        "ru": "Мокрый асфальт",
+        "en": "Wet asphalt"
+      },
+      "color": "#59605F",
+      "familyId": "artek-universal",
+      "variantId": "asphalt",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 51,
+      "sku": "EP-051"
+    },
+    {
+      "id": "artek-universal-white",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Universal emal — Oq",
+        "ru": "Универсальная эмаль — Белая",
+        "en": "Universal enamel — White"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-052.png",
+      "originalImage": "assets/catalog-2026/product-052.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Oq",
+        "ru": "Белая",
+        "en": "White"
+      },
+      "color": "#F5F4EB",
+      "familyId": "artek-universal",
+      "variantId": "white",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 52,
+      "sku": "EP-052"
+    },
+    {
+      "id": "artek-universal-black",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Universal emal — Qora",
+        "ru": "Универсальная эмаль — Чёрная",
+        "en": "Universal enamel — Black"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-053.png",
+      "originalImage": "assets/catalog-2026/product-053.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Qora",
+        "ru": "Чёрная",
+        "en": "Black"
+      },
+      "color": "#171717",
+      "familyId": "artek-universal",
+      "variantId": "black",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 53,
+      "sku": "EP-053"
+    },
+    {
+      "id": "artek-universal-chocolate",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Universal emal — Shokolad jigarrang",
+        "ru": "Универсальная эмаль — Шоколадная",
+        "en": "Universal enamel — Chocolate"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-054.png",
+      "originalImage": "assets/catalog-2026/product-054.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Shokolad jigarrang",
+        "ru": "Шоколадная",
+        "en": "Chocolate"
+      },
+      "color": "#693E2A",
+      "familyId": "artek-universal",
+      "variantId": "chocolate",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 54,
+      "sku": "EP-054"
+    },
+    {
+      "id": "artek-universal-blue",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Universal emal — Havorang",
+        "ru": "Универсальная эмаль — Голубая",
+        "en": "Universal enamel — Blue"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-055.png",
+      "originalImage": "assets/catalog-2026/product-055.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Havorang",
+        "ru": "Голубая",
+        "en": "Blue"
+      },
+      "color": "#12A7D6",
+      "familyId": "artek-universal",
+      "variantId": "blue",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 55,
+      "sku": "EP-055"
+    },
+    {
+      "id": "artek-universal-claret",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Universal emal — To‘q qizil",
+        "ru": "Универсальная эмаль — Бордовая",
+        "en": "Universal enamel — Claret red"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-056.png",
+      "originalImage": "assets/catalog-2026/product-056.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "To‘q qizil",
+        "ru": "Бордовая",
+        "en": "Claret red"
+      },
+      "color": "#C84237",
+      "familyId": "artek-universal",
+      "variantId": "claret",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 56,
+      "sku": "EP-056"
+    },
+    {
+      "id": "artek-universal-red",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Universal emal — Qizil",
+        "ru": "Универсальная эмаль — Красная",
+        "en": "Universal enamel — Red"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-057.png",
+      "originalImage": "assets/catalog-2026/product-057.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Qizil",
+        "ru": "Красная",
+        "en": "Red"
+      },
+      "color": "#E43C30",
+      "familyId": "artek-universal",
+      "variantId": "red",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 57,
+      "sku": "EP-057"
+    },
+    {
+      "id": "artek-universal-green",
+      "aliases": [],
+      "categoryId": "emal",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Universal emal — Yashil",
+        "ru": "Универсальная эмаль — Зелёная",
+        "en": "Universal enamel — Green"
+      },
+      "description": {
+        "uz": "Metall va yog‘och yuzalar uchun emal bo‘yoqlar.",
+        "ru": "Эмали для металлических и деревянных поверхностей.",
+        "en": "Enamel paints for metal and wood surfaces."
+      },
+      "image": "assets/catalog-2026/product-058.png",
+      "originalImage": "assets/catalog-2026/product-058.png",
+      "packages": [
+        0.9,
+        2.7
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": {
+        "uz": "Yashil",
+        "ru": "Зелёная",
+        "en": "Green"
+      },
+      "color": "#168A42",
+      "familyId": "artek-universal",
+      "variantId": "green",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 58,
+      "sku": "EP-058"
+    },
+    {
+      "id": "artek-facade-white",
+      "aliases": [],
+      "categoryId": "water",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Yuviladigan fasad bo‘yog‘i",
+        "ru": "Моющаяся фасадная краска",
+        "en": "Washable facade paint"
+      },
+      "description": {
+        "uz": "Devor yuzalari uchun suv asosidagi bo‘yoq.",
+        "ru": "Краска на водной основе для стен.",
+        "en": "A water-based paint for wall surfaces."
+      },
+      "image": "assets/catalog-2026/product-059.png",
+      "originalImage": null,
+      "packages": [
+        18,
+        20
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "artek-facade-white",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 59,
+      "sku": "EP-059"
+    },
+    {
+      "id": "artek-interior",
+      "aliases": [],
+      "categoryId": "water",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Interior — ichki ishlar uchun",
+        "ru": "Interior — для внутренних работ",
+        "en": "Interior — for indoor use"
+      },
+      "description": {
+        "uz": "Devor yuzalari uchun suv asosidagi bo‘yoq.",
+        "ru": "Краска на водной основе для стен.",
+        "en": "A water-based paint for wall surfaces."
+      },
+      "image": "assets/catalog-2026/product-060.png",
+      "originalImage": null,
+      "packages": [
+        18,
+        20
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "artek-interior",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 60,
+      "sku": "EP-060"
+    },
+    {
+      "id": "artek-facade-black",
+      "aliases": [],
+      "categoryId": "water",
+      "brand": "ARTEK",
+      "title": {
+        "uz": "Fasad bo‘yog‘i — qora qadoq",
+        "ru": "Фасадная краска — чёрная упаковка",
+        "en": "Facade paint — black packaging"
+      },
+      "description": {
+        "uz": "Devor yuzalari uchun suv asosidagi bo‘yoq.",
+        "ru": "Краска на водной основе для стен.",
+        "en": "A water-based paint for wall surfaces."
+      },
+      "image": "assets/catalog-2026/product-061.png",
+      "originalImage": null,
+      "packages": [
+        18,
+        20
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "artek-facade-black",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 61,
+      "sku": "EP-061"
+    },
+    {
+      "id": "ep-travertin",
+      "aliases": [],
+      "categoryId": "travertin",
+      "brand": "ELEMENT PAINT",
+      "title": {
+        "uz": "Premium suyuq travertin",
+        "ru": "Премиальный жидкий травертин",
+        "en": "Premium liquid travertine"
+      },
+      "description": {
+        "uz": "Devorlarda tabiiy tosh ko‘rinishini hosil qiluvchi qoplama.",
+        "ru": "Покрытие для стен с фактурой натурального камня.",
+        "en": "A wall coating with a natural stone texture."
+      },
+      "image": "assets/catalog-2026/product-062.png",
+      "originalImage": null,
+      "packages": [
+        25
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "ep-travertin",
+      "variantId": "",
+      "sourceStatus": "admin",
+      "catalogNumber": 62,
+      "sku": "EP-062"
+    },
+    {
+      "id": "delta-travertine",
+      "aliases": [],
+      "categoryId": "travertin",
+      "brand": "DELTA",
+      "title": {
+        "uz": "Delta suyuq travertin",
+        "ru": "Жидкий травертин Delta",
+        "en": "Delta liquid travertine"
+      },
+      "description": {
+        "uz": "Devorlarda tabiiy tosh ko‘rinishini hosil qiluvchi qoplama.",
+        "ru": "Покрытие для стен с фактурой натурального камня.",
+        "en": "A wall coating with a natural stone texture."
+      },
+      "image": "assets/catalog-2026/product-063.png",
+      "originalImage": null,
+      "packages": [
+        25
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "delta-travertine",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 63,
+      "sku": "EP-063"
+    },
+    {
+      "id": "crown-travertin",
+      "aliases": [],
+      "categoryId": "travertin",
+      "brand": "CROWN",
+      "title": {
+        "uz": "Crown suyuq travertin",
+        "ru": "Жидкий травертин Crown",
+        "en": "Crown liquid travertine"
+      },
+      "description": {
+        "uz": "Devorlarda tabiiy tosh ko‘rinishini hosil qiluvchi qoplama.",
+        "ru": "Покрытие для стен с фактурой натурального камня.",
+        "en": "A wall coating with a natural stone texture."
+      },
+      "image": "assets/catalog-2026/product-064.png",
+      "originalImage": null,
+      "packages": [
+        25
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "crown-travertin",
+      "variantId": "",
+      "sourceStatus": "admin",
+      "catalogNumber": 64,
+      "sku": "EP-064"
+    },
+    {
+      "id": "waterlux-facade",
+      "aliases": [],
+      "categoryId": "water",
+      "brand": "WATERLUX",
+      "title": {
+        "uz": "Fasad va interyer akril bo‘yog‘i",
+        "ru": "Акриловая краска для фасада и интерьера",
+        "en": "Acrylic paint for facade and interior"
+      },
+      "description": {
+        "uz": "Devor yuzalari uchun suv asosidagi bo‘yoq.",
+        "ru": "Краска на водной основе для стен.",
+        "en": "A water-based paint for wall surfaces."
+      },
+      "image": "assets/catalog-2026/product-065.png",
+      "originalImage": null,
+      "packages": [
+        4,
+        9,
+        14,
+        18,
+        20
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "waterlux-facade",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 65,
+      "sku": "EP-065"
+    },
+    {
+      "id": "element-primer",
+      "aliases": [],
+      "categoryId": "primer",
+      "brand": "ELEMENT PAINT",
+      "title": {
+        "uz": "Astar (gruntovka)",
+        "ru": "Грунтовка",
+        "en": "Primer"
+      },
+      "description": {
+        "uz": "Bo‘yashdan avval yuzani tayyorlash uchun akril astar.",
+        "ru": "Акриловая грунтовка для подготовки поверхности перед окрашиванием.",
+        "en": "An acrylic primer for preparing surfaces before painting."
+      },
+      "image": "assets/catalog-2026/product-066.png",
+      "originalImage": null,
+      "packages": [
+        3
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "element-primer",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 66,
+      "sku": "EP-066"
+    },
+    {
+      "id": "element-travertine-lacquer",
+      "aliases": [],
+      "categoryId": "lak",
+      "brand": "ELEMENT PAINT",
+      "title": {
+        "uz": "Travertin uchun lak",
+        "ru": "Лак для травертина",
+        "en": "Travertine lacquer"
+      },
+      "description": {
+        "uz": "Yuzaga yakuniy qoplama berish uchun lak. Qaysi yuzaga ishlatishingizga qarab tanlang.",
+        "ru": "Лак для финишного покрытия. Выбирайте с учётом поверхности.",
+        "en": "A varnish for the final coat. Choose one suited to your surface."
+      },
+      "image": "assets/catalog-2026/product-067.png",
+      "originalImage": null,
+      "packages": [
+        5,
+        10,
+        15
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "element-travertine-lacquer",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 67,
+      "sku": "EP-067"
+    },
+    {
+      "id": "element-primer-plus",
+      "aliases": [],
+      "categoryId": "primer",
+      "brand": "ELEMENT PAINT",
+      "title": {
+        "uz": "Primer Plus",
+        "ru": "Primer Plus",
+        "en": "Primer Plus"
+      },
+      "description": {
+        "uz": "Bo‘yashdan avval yuzani tayyorlash uchun akril astar.",
+        "ru": "Акриловая грунтовка для подготовки поверхности перед окрашиванием.",
+        "en": "An acrylic primer for preparing surfaces before painting."
+      },
+      "image": "assets/catalog-2026/product-068.png",
+      "originalImage": null,
+      "packages": [
+        20
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "element-primer-plus",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 68,
+      "sku": "EP-068"
+    },
+    {
+      "id": "argon-pva",
+      "aliases": [],
+      "categoryId": "pva",
+      "brand": "ARGON",
+      "title": {
+        "uz": "Argon 801 PVA yelimi",
+        "ru": "Клей ПВА Argon 801",
+        "en": "Argon 801 PVA adhesive"
+      },
+      "description": {
+        "uz": "Yog‘och, qog‘oz va qurilish ishlari uchun PVA yelimi.",
+        "ru": "Клей ПВА для дерева, бумаги и строительных работ.",
+        "en": "PVA adhesive for wood, paper and construction work."
+      },
+      "image": "assets/catalog-2026/product-069.png",
+      "originalImage": null,
+      "packages": [
+        0.8
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "argon-pva",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 69,
+      "sku": "EP-069"
+    },
+    {
+      "id": "dekor-red",
+      "aliases": [],
+      "categoryId": "decor",
+      "brand": "DEKOR",
+      "title": {
+        "uz": "DEKOR — qizil qadoq",
+        "ru": "DEKOR — красная упаковка",
+        "en": "DEKOR — red package"
+      },
+      "description": {
+        "uz": "Devor yuzalari uchun dekorativ qoplama.",
+        "ru": "Декоративное покрытие для стен.",
+        "en": "A decorative coating for wall surfaces."
+      },
+      "image": "assets/catalog-2026/product-070.png",
+      "originalImage": null,
+      "packages": [
+        20
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "dekor-red",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 70,
+      "sku": "EP-070"
+    },
+    {
+      "id": "dekor-blue",
+      "aliases": [],
+      "categoryId": "decor",
+      "brand": "DEKOR",
+      "title": {
+        "uz": "DEKOR — ko‘k qadoq",
+        "ru": "DEKOR — синяя упаковка",
+        "en": "DEKOR — blue package"
+      },
+      "description": {
+        "uz": "Devor yuzalari uchun dekorativ qoplama.",
+        "ru": "Декоративное покрытие для стен.",
+        "en": "A decorative coating for wall surfaces."
+      },
+      "image": "assets/catalog-2026/product-071.png",
+      "originalImage": null,
+      "packages": [
+        20
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "dekor-blue",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 71,
+      "sku": "EP-071"
+    },
+    {
+      "id": "delta-primer",
+      "aliases": [],
+      "categoryId": "primer",
+      "brand": "DELTA",
+      "title": {
+        "uz": "Delta akril astari",
+        "ru": "Акриловая грунтовка Delta",
+        "en": "Delta acrylic primer"
+      },
+      "description": {
+        "uz": "Bo‘yashdan avval yuzani tayyorlash uchun akril astar.",
+        "ru": "Акриловая грунтовка для подготовки поверхности перед окрашиванием.",
+        "en": "An acrylic primer for preparing surfaces before painting."
+      },
+      "image": "assets/catalog-2026/product-072.png",
+      "originalImage": null,
+      "packages": [
+        2.8,
+        5
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "delta-primer",
+      "variantId": "",
+      "sourceStatus": "client-provided-catalog",
+      "catalogNumber": 72,
+      "sku": "EP-072"
+    },
+    {
+      "id": "milano-decorative",
+      "aliases": [],
+      "categoryId": "travertin",
+      "brand": "BERLAK",
+      "title": {
+        "uz": "Milano suyuq travertini",
+        "ru": "Жидкий травертин Milano",
+        "en": "Milano liquid travertine"
+      },
+      "description": {
+        "uz": "Tabiiy tosh ko‘rinishidagi dekorativ qoplama. Ichki va tashqi yuzalar uchun.",
+        "ru": "Декоративное покрытие с фактурой натурального камня для внутренних и наружных поверхностей.",
+        "en": "A decorative coating with a natural stone texture for interior and exterior surfaces."
+      },
+      "image": "assets/milano-photo-quality-20261015.webp",
+      "originalImage": "assets/milano-photo-original-20261014.png",
+      "packages": [
+        25
+      ],
+      "packageUnit": "kg",
+      "variants": [],
+      "colorName": null,
+      "color": null,
+      "familyId": "milano-decorative",
+      "variantId": "",
+      "sourceStatus": "client-provided-label",
+      "catalogNumber": 73,
+      "sku": "EP-073"
+    }
+  ],
+  "categories": [
+    {
+      "id": "emal",
+      "name": {
+        "uz": "Emal bo‘yoqlar",
+        "ru": "Эмали",
+        "en": "Enamel paints"
+      },
+      "sort_order": 0
+    },
+    {
+      "id": "water",
+      "name": {
+        "uz": "Devor bo‘yoqlari",
+        "ru": "Краски для стен",
+        "en": "Wall paints"
+      },
+      "sort_order": 1
+    },
+    {
+      "id": "pva",
+      "name": {
+        "uz": "PVA yelimlari",
+        "ru": "Клеи ПВА",
+        "en": "PVA adhesives"
+      },
+      "sort_order": 2
+    },
+    {
+      "id": "primer",
+      "name": {
+        "uz": "Astarlar (gruntovka)",
+        "ru": "Грунтовки",
+        "en": "Primers"
+      },
+      "sort_order": 3
+    },
+    {
+      "id": "travertin",
+      "name": {
+        "uz": "Suyuq travertin",
+        "ru": "Жидкий травертин",
+        "en": "Liquid travertine"
+      },
+      "sort_order": 4
+    },
+    {
+      "id": "decor",
+      "name": {
+        "uz": "Dekorativ qoplamalar",
+        "ru": "Декоративные покрытия",
+        "en": "Decorative coatings"
+      },
+      "sort_order": 5
+    },
+    {
+      "id": "ottocento",
+      "name": {
+        "uz": "Ottocento",
+        "ru": "Отточенто",
+        "en": "Ottocento"
+      },
+      "sort_order": 6
+    },
+    {
+      "id": "wallpaper",
+      "name": {
+        "uz": "Suyuq gulqog‘oz",
+        "ru": "Жидкие обои",
+        "en": "Liquid wallpaper"
+      },
+      "sort_order": 7
+    },
+    {
+      "id": "road",
+      "name": {
+        "uz": "Yo‘l uchun bo‘yoqlar",
+        "ru": "Краски для дорог",
+        "en": "Road paints"
+      },
+      "sort_order": 8
+    },
+    {
+      "id": "salt",
+      "name": {
+        "uz": "Sho‘rlashga qarshi vositalar",
+        "ru": "Средства против высолов",
+        "en": "Anti-efflorescence products"
+      },
+      "sort_order": 9
+    },
+    {
+      "id": "lak",
+      "name": {
+        "uz": "Laklar",
+        "ru": "Лаки",
+        "en": "Varnishes"
+      },
+      "sort_order": 10
+    },
+    {
+      "id": "preparation",
+      "name": {
+        "uz": "Shpaklyovkalar",
+        "ru": "Шпатлёвки",
+        "en": "Fillers"
+      },
+      "sort_order": 11
+    },
+    {
+      "id": "adhesive",
+      "name": {
+        "uz": "Gulqog‘oz yelimlari",
+        "ru": "Клеи для обоев",
+        "en": "Wallpaper adhesives"
+      },
+      "sort_order": 12
+    }
+  ]
+};

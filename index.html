@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Element Paint — Reklama va Kontent Boshqaruv Ish Jadvali</title>
+  <meta name="description" content="Element Paint 73 ta mahsulot reklama holatlari, video kontent rejalari va izohlar ish jadvali.">
+  <link rel="icon" type="image/png" href="assets/logo_light.png">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       App Header & Statistics Dashboard
+       ======================================================================== -->
+  <header class="app-header">
+    <div class="container">
+      <div class="header-top">
+        <div class="brand-block">
+          <img src="assets/logo_light.png" alt="Element Paint" class="brand-logo-img" onerror="this.style.display='none'">
+          <div class="brand-meta">
+            <h1>
+              <span>Element Paint</span>
+              <span class="badge-official">Reklama Markazi</span>
+            </h1>
+            <p>73 ta mahsulot reklama monitoringi, video kontent rejalari va izohlar boshqaruvi</p>
+          </div>
+        </div>
+
+        <!-- Quick actions -->
+        <div class="header-actions">
+          <input type="file" id="fileImportInput" accept=".json" style="display: none;">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnImportJson" title="Zaxira nusxadan tiklash">
+            <span>📥 Zaxirani Tiklash</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btnExportJson" title="Barcha ma'lumotlarni saqlab olish">
+            <span>📤 JSON Zaxira</span>
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" id="btnExportCsv" title="Excel formatida hisobot yuklash">
+            <span>📊 Excel / CSV Hisobot</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btnPrintReport" title="Sahifani chop etish yoki PDF qilish">
+            <span>🖨️ Chop etish</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Dashboard Cards -->
+      <div class="stats-grid">
+        <div class="stat-card stat-total">
+          <div class="stat-header">
+            <span class="stat-title">Jami Mahsulotlar</span>
+            <span class="stat-icon">📦</span>
+          </div>
+          <div class="stat-value" id="statTotal">73</div>
+          <span class="stat-desc">Katalogdagi barcha tovarlar</span>
+        </div>
+
+        <div class="stat-card stat-red">
+          <div class="stat-header">
+            <span class="stat-title" style="color: #fca5a5;">Hali Qilinmagan</span>
+            <span class="stat-icon">🔴</span>
+          </div>
+          <div class="stat-value" id="statRed" style="color: #f87171;">0 <small>ta</small></div>
+          <span class="stat-desc">Reklama kutilayotgan mahsulotlar</span>
+        </div>
+
+        <div class="stat-card stat-yellow">
+          <div class="stat-header">
+            <span class="stat-title" style="color: #fde68a;">Reja Tuzilgan</span>
+            <span class="stat-icon">🟡</span>
+          </div>
+          <div class="stat-value" id="statYellow" style="color: #fbbf24;">0 <small>ta</small></div>
+          <span class="stat-desc">Ssenariy / Jarayondagi ishlar</span>
+        </div>
+
+        <div class="stat-card stat-blue">
+          <div class="stat-header">
+            <span class="stat-title" style="color: #bfdbfe;">Tayyorlangan</span>
+            <span class="stat-icon">🔵</span>
+          </div>
+          <div class="stat-value" id="statBlue" style="color: #60a5fa;">0 <small>ta</small></div>
+          <span class="stat-desc">Reklamasi tayyor bo'lganlar</span>
+        </div>
+
+        <div class="stat-card stat-videos">
+          <div class="stat-header">
+            <span class="stat-title" style="color: #e9d5ff;">Jami Videolar / Ishlar</span>
+            <span class="stat-icon">🎬</span>
+          </div>
+          <div class="stat-value" id="statVideos" style="color: #c084fc;">0 <small>ta</small></div>
+          <span class="stat-desc">Barcha rejalashtirilgan kontentlar</span>
+        </div>
+      </div>
+
+      <!-- Overall Advertising Progress Bar -->
+      <div class="header-progress">
+        <div class="progress-info">
+          <span>Umumiy Reklama Tayyorlik Darajasi</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-segment blue" id="progBlue" style="width: 0%;" title="Tayyorlangan"></div>
+          <div class="progress-segment yellow" id="progYellow" style="width: 0%;" title="Reja tuzilgan"></div>
+          <div class="progress-segment red" id="progRed" style="width: 100%;" title="Hali qilinmagan"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       Main Content Area
+       ======================================================================== -->
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Filter & Controls Toolbar -->
+      <div class="toolbar-card">
+        <div class="toolbar-row-top">
+          <!-- Status Tabs -->
+          <div class="status-tabs" role="tablist" aria-label="Reklama holatlari bo'yicha filter">
+            <button type="button" class="tab-btn active" id="tabAll">
+              <span>Barchasi</span>
+              <span class="tab-count" id="countAll">73</span>
+            </button>
+            <button type="button" class="tab-btn tab-red" id="tabRed">
+              <span>🔴 Hali qilinmagan</span>
+              <span class="tab-count" id="countRed">0</span>
+            </button>
+            <button type="button" class="tab-btn tab-yellow" id="tabYellow">
+              <span>🟡 Reja tuzilgan</span>
+              <span class="tab-count" id="countYellow">0</span>
+            </button>
+            <button type="button" class="tab-btn tab-blue" id="tabBlue">
+              <span>🔵 Tayyorlangan</span>
+              <span class="tab-count" id="countBlue">0</span>
+            </button>
+          </div>
+
+          <!-- View Switcher -->
+          <div class="view-switchers" role="group" aria-label="Ko'rinish turini tanlash">
+            <button type="button" class="view-btn active" id="viewTableBtn">
+              <span>📋</span> Jadval
+            </button>
+            <button type="button" class="view-btn" id="viewCardsBtn">
+              <span>🎴</span> Kartalar
+            </button>
+          </div>
+        </div>
+
+        <div class="toolbar-row-bottom">
+          <!-- Live Search -->
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input 
+              type="search" 
+              id="searchInput" 
+              class="search-input" 
+              placeholder="Mahsulot nomi, kodi, brendi yoki izoh bo'yicha qidiruv..."
+              aria-label="Mahsulotlarni qidirish"
+            />
+          </div>
+
+          <!-- Brand filter -->
+          <select id="brandSelect" class="select-filter" aria-label="Brend bo'yicha saralash">
+            <option value="all">Barcha brendlar</option>
+          </select>
+
+          <!-- Category filter -->
+          <select id="categorySelect" class="select-filter" aria-label="Kategoriya bo'yicha saralash">
+            <option value="all">Barcha kategoriyalar</option>
+          </select>
+
+          <!-- Clear Filters -->
+          <button type="button" id="clearFiltersBtn" class="btn-reset-filters">
+            <span>✕ Tozalash</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Results metadata -->
+      <div class="results-meta">
+        <span id="resultsCount">73 ta mahsulot ko'rsatilmoqda</span>
+        <span style="font-size: 0.8rem; color: #94a3b8;">
+          💡 Maslahat: Har bir mahsulot qatoridagi <strong>"➕ Ishlar & Izoh"</strong> tugmasini bosib bir nechta video va topshiriq qo'shishingiz mumkin.
+        </span>
+      </div>
+
+      <!-- Table View -->
+      <div id="tableViewContainer" class="table-card">
+        <div class="table-responsive">
+          <table class="ad-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">№</th>
+                <th style="width: 70px;">Rasm</th>
+                <th>Mahsulot Nomi & Ma'lumot</th>
+                <th style="width: 190px;">Reklama Holati</th>
+                <th style="width: 170px;">Videolar / Ishlar</th>
+                <th>So'nggi Izoh / Topshiriq</th>
+                <th style="width: 160px; text-align: right;">Amallar</th>
+              </tr>
+            </thead>
+            <tbody id="adTableBody">
+              <!-- Dynamically rendered via app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Cards / Grid View -->
+      <div id="cardsViewContainer" hidden>
+        <div class="cards-grid" id="cardsGrid">
+          <!-- Dynamically rendered via app.js -->
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="emptyState" hidden>
+        <div class="empty-icon">🔍</div>
+        <h3>Hech qanday mahsulot topilmadi</h3>
+        <p>Qidiruv so'zini yoki filtrlarni o'zgartirib ko'ring.</p>
+        <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('clearFiltersBtn').click()">
+          Filtrlarni qayta tiklash
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       Modern Video & Sub-tasks Management Modal
+       Utilizing <dialog closedby="any"> according to modern-web-guidance
+       ======================================================================== -->
+  <dialog id="productModal" closedby="any" aria-labelledby="modalProductTitle">
+    <div class="modal-shell">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-header-product">
+          <img src="" alt="" id="modalProductImg" class="modal-product-img">
+          <div class="modal-header-text">
+            <h2 id="modalProductTitle">Mahsulot Nomi</h2>
+            <p id="modalProductMeta">Brend · Kategoriya · Qadoq</p>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <a href="#" target="_blank" rel="noopener" id="modalSiteLink" class="btn btn-secondary btn-sm" title="Rasmiy saytda ochish">
+            <span>ElementPaint.uz ↗</span>
+          </a>
+          <button type="button" id="modalCloseBtn" class="modal-close-btn" aria-label="Oynani yopish">×</button>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        
+        <!-- Status Switcher for Product -->
+        <section class="status-selection-card">
+          <h4>1. Mahsulotning umumiy reklama holati:</h4>
+          <div class="status-options-grid">
+            <label class="status-radio-label" id="labelRadioRed">
+              <input type="radio" name="productStatusRadio" id="statusRadioRed" value="red">
+              <span class="status-dot red"></span>
+              <span>🔴 Hali qilinmagan</span>
+            </label>
+            <label class="status-radio-label" id="labelRadioYellow">
+              <input type="radio" name="productStatusRadio" id="statusRadioYellow" value="yellow">
+              <span class="status-dot yellow"></span>
+              <span>🟡 Reja tuzilgan</span>
+            </label>
+            <label class="status-radio-label" id="labelRadioBlue">
+              <input type="radio" name="productStatusRadio" id="statusRadioBlue" value="blue">
+              <span class="status-dot blue"></span>
+              <span>🔵 Tayyorlangan</span>
+            </label>
+          </div>
+        </section>
+
+        <!-- New Video / Task Creation Form -->
+        <section class="task-form-box">
+          <div class="task-form-header">
+            <h3 id="taskFormTitle">
+              <span>➕</span> Yangi Video / Reklama Ishi Qo‘shish
+            </h3>
+            <button type="button" id="btnCancelTaskEdit" class="btn btn-outline btn-sm" hidden>
+              Bekor qilish
+            </button>
+          </div>
+
+          <form id="taskForm">
+            <input type="hidden" id="taskIdInput">
+            
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="taskTitleInput" class="form-label">Video / Ish Mavzusi *</label>
+                <input 
+                  type="text" 
+                  id="taskTitleInput" 
+                  class="form-input" 
+                  placeholder="Masalan: Reels - Suv o‘tkazmaslik sinovi" 
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="taskTypeSelect" class="form-label">Kontent Formati</label>
+                <select id="taskTypeSelect" class="form-select">
+                  <option value="reels">Instagram Reels</option>
+                  <option value="tiktok">TikTok Video</option>
+                  <option value="shorts">YouTube Shorts</option>
+                  <option value="youtube">YouTube Katta Video</option>
+                  <option value="telegram">Telegram Post / Video</option>
+                  <option value="banner">Foto / Banner reklama</option>
+                  <option value="script">Reklama ssenariysi</option>
+                  <option value="tv">TV / Tashqi reklama</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="taskStatusSelect" class="form-label">Ushbu Videoning Holati</label>
+                <select id="taskStatusSelect" class="form-select">
+                  <option value="red">🔴 Hali qilinmagan (Olinmagan)</option>
+                  <option value="yellow">🟡 Reja tuzilgan (Ssenariy / Jarayonda)</option>
+                  <option value="blue">🔵 Tayyorlangan (Tasvirga olindi / Montaj tayyor)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="taskDeadlineInput" class="form-label">Muddat / Rejalashtirilgan Sana</label>
+                <input type="date" id="taskDeadlineInput" class="form-input">
+              </div>
+
+              <div class="form-group form-group-full">
+                <label for="taskLinkInput" class="form-label">Video / Material Havolasi (Google Drive, Telegram, Instagram link)</label>
+                <input 
+                  type="url" 
+                  id="taskLinkInput" 
+                  class="form-input" 
+                  placeholder="https://drive.google.com/... yoki https://t.me/..."
+                />
+              </div>
+
+              <div class="form-group form-group-full">
+                <label for="taskCommentInput" class="form-label">Batafsil Izoh / Video Ssenariysi / Eslatmalar</label>
+                <textarea 
+                  id="taskCommentInput" 
+                  class="form-textarea" 
+                  rows="3" 
+                  placeholder="Ushbu video uchun g'oya, ssenariy kadrlari, usta gaplari yoki muhim nuqtalar..."
+                ></textarea>
+              </div>
+
+              <div class="form-group form-group-full" style="text-align: right;">
+                <button type="submit" id="btnSaveTask" class="btn btn-primary">
+                  <span>➕ Ishni Saqlash</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <!-- Tasks / Videos History List -->
+        <section class="tasks-history-section">
+          <h3>
+            <span>Ushbu mahsulot uchun yaratilgan ishlar va videolar (<span id="modalTaskCount">0</span>)</span>
+          </h3>
+
+          <div id="modalEmptyTasks" class="empty-state" style="padding: 24px; margin: 0;">
+            <p>Hozircha ushbu mahsulot uchun video yoki reklama ishi kiritilmagan.<br>Yuqoridagi formadan birinchi videoni rejalashtiring.</p>
+          </div>
+
+          <div class="task-list" id="modalTaskList">
+            <!-- Dynamically populated via app.js -->
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="document.getElementById('productModal').close()">
+          Oynani yopish
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ========================================================================
+       Toast Notifications Container
+       ======================================================================== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ========================================================================
+       App Footer
+       ======================================================================== -->
+  <footer class="app-footer">
+    <div class="container footer-content">
+      <span>© 2026 Element Paint — Reklama va Kontent Boshqaruv Tizimi</span>
+      <div class="footer-links">
+        <a href="https://elementpaint.uz/" target="_blank" rel="noopener">Elementpaint.uz rasmiy sayti ↗</a>
+        <a href="tel:+998953003000">+998 95 300 30 00</a>
+        <a href="https://t.me/Elementpaint_uzbekistan" target="_blank" rel="noopener">Telegram kanal</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data/products-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

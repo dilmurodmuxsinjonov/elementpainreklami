@@ -1,13 +1,15 @@
 /**
- * Element Paint — Reklama va Kontent Boshqaruv Tizimi (App Logic)
- * 73 ta mahsulot monitoringi, video kontent rejalari va izohlar arxivi
+ * Element Paint — Reklama va Kontent Boshqaruv Tizimi (App Logic v2.0)
+ * 73 ta mahsulot monitoringi, video hisoboti (tasdiqlangan/kutilayotgan),
+ * avtomatik hozirgi vaqt belgilash va aniq dizayn
  */
 
 (function () {
   'use strict';
 
   // Local storage key
-  const STORAGE_KEY = 'elementpaint_ad_data_v1';
+  const STORAGE_KEY = 'elementpaint_ad_data_v2';
+  const LEGACY_STORAGE_KEY = 'elementpaint_ad_data_v1';
 
   // State
   let catalog = {
@@ -20,11 +22,12 @@
   };
 
   let currentFilter = {
-    status: 'all',     // 'all' | 'red' | 'yellow' | 'blue'
+    status: 'all',       // 'all' | 'red' | 'yellow' | 'blue' | 'approved'
+    videoPresence: 'all', // 'all' | 'has_videos' | 'has_approved' | 'has_pending' | 'no_videos'
     brand: 'all',
     category: 'all',
     search: '',
-    view: 'table'      // 'table' | 'cards'
+    view: 'table'        // 'table' | 'cards'
   };
 
   let activeProductId = null;
@@ -39,14 +42,18 @@
     emptyState: document.getElementById('emptyState'),
     resultsCount: document.getElementById('resultsCount'),
     
-    // Stats
+    // KPI Stats
     statTotal: document.getElementById('statTotal'),
+    statCoveredProducts: document.getElementById('statCoveredProducts'),
+    statCoveragePercent: document.getElementById('statCoveragePercent'),
+    statTotalVideos: document.getElementById('statTotalVideos'),
+    statAvgVideos: document.getElementById('statAvgVideos'),
+    statApprovedVideos: document.getElementById('statApprovedVideos'),
+    statPendingVideos: document.getElementById('statPendingVideos'),
     statRed: document.getElementById('statRed'),
-    statYellow: document.getElementById('statYellow'),
-    statBlue: document.getElementById('statBlue'),
-    statVideos: document.getElementById('statVideos'),
     
     // Progress
+    progGreen: document.getElementById('progGreen'),
     progBlue: document.getElementById('progBlue'),
     progYellow: document.getElementById('progYellow'),
     progRed: document.getElementById('progRed'),
@@ -57,11 +64,14 @@
     tabRed: document.getElementById('tabRed'),
     tabYellow: document.getElementById('tabYellow'),
     tabBlue: document.getElementById('tabBlue'),
+    tabApproved: document.getElementById('tabApproved'),
     countAll: document.getElementById('countAll'),
     countRed: document.getElementById('countRed'),
     countYellow: document.getElementById('countYellow'),
     countBlue: document.getElementById('countBlue'),
+    countApproved: document.getElementById('countApproved'),
     
+    videoFilterSelect: document.getElementById('videoFilterSelect'),
     brandSelect: document.getElementById('brandSelect'),
     categorySelect: document.getElementById('categorySelect'),
     searchInput: document.getElementById('searchInput'),
@@ -99,9 +109,10 @@
     taskTitleInput: document.getElementById('taskTitleInput'),
     taskTypeSelect: document.getElementById('taskTypeSelect'),
     taskStatusSelect: document.getElementById('taskStatusSelect'),
+    taskCreatedAtInput: document.getElementById('taskCreatedAtInput'),
+    taskIsApprovedInput: document.getElementById('taskIsApprovedInput'),
     taskLinkInput: document.getElementById('taskLinkInput'),
     taskCommentInput: document.getElementById('taskCommentInput'),
-    taskDeadlineInput: document.getElementById('taskDeadlineInput'),
     btnSaveTask: document.getElementById('btnSaveTask'),
     btnCancelTaskEdit: document.getElementById('btnCancelTaskEdit'),
     
@@ -142,10 +153,11 @@
   const TYPE_NAMES = {
     reels: 'Reels / Shorts',
     tiktok: 'TikTok',
+    shorts: 'YouTube Shorts',
     youtube: 'YouTube Video',
     banner: 'Banner / Post',
     telegram: 'Telegram Post',
-    tv: 'TV / Media',
+    tv: 'TV / Tashqi reklama',
     script: 'Reklama ssenariysi'
   };
 
@@ -179,7 +191,11 @@
   // Load Saved Ad Store from LocalStorage
   function loadAdStore() {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY);
+      let saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) {
+        // Fallback check for v1
+        saved = localStorage.getItem(LEGACY_STORAGE_KEY);
+      }
       if (saved) {
         adStore = JSON.parse(saved);
       }
@@ -198,6 +214,13 @@
           status: 'red',
           tasks: []
         };
+      } else {
+        // Ensure each task has isApproved boolean
+        (adStore.products[p.id].tasks || []).forEach(t => {
+          if (t.isApproved === undefined) {
+            t.isApproved = false;
+          }
+        });
       }
     });
   }
@@ -236,6 +259,13 @@
     el.tabRed.addEventListener('click', () => setStatusFilter('red'));
     el.tabYellow.addEventListener('click', () => setStatusFilter('yellow'));
     el.tabBlue.addEventListener('click', () => setStatusFilter('blue'));
+    el.tabApproved.addEventListener('click', () => setStatusFilter('approved'));
+
+    // Video presence filter
+    el.videoFilterSelect.addEventListener('change', (e) => {
+      currentFilter.videoPresence = e.target.value;
+      render();
+    });
 
     // Search and select filters
     el.searchInput.addEventListener('input', (e) => {
@@ -255,12 +285,14 @@
 
     el.clearFiltersBtn.addEventListener('click', () => {
       currentFilter.status = 'all';
+      currentFilter.videoPresence = 'all';
       currentFilter.brand = 'all';
       currentFilter.category = 'all';
       currentFilter.search = '';
       el.searchInput.value = '';
       el.brandSelect.value = 'all';
       el.categorySelect.value = 'all';
+      el.videoFilterSelect.value = 'all';
       updateTabButtons();
       render();
     });
@@ -301,10 +333,8 @@
     const dialog = el.productModal;
     if (!dialog) return;
 
-    // Fallback for browsers without native closedBy support
     if (!('closedBy' in HTMLDialogElement.prototype)) {
       dialog.addEventListener('click', (event) => {
-        // When clicking backdrop, target is the dialog element itself
         if (event.target !== dialog) return;
 
         const rect = dialog.getBoundingClientRect();
@@ -334,11 +364,12 @@
   }
 
   function updateTabButtons() {
-    [el.tabAll, el.tabRed, el.tabYellow, el.tabBlue].forEach(btn => btn.classList.remove('active'));
+    [el.tabAll, el.tabRed, el.tabYellow, el.tabBlue, el.tabApproved].forEach(btn => btn.classList.remove('active'));
     if (currentFilter.status === 'all') el.tabAll.classList.add('active');
     else if (currentFilter.status === 'red') el.tabRed.classList.add('active');
     else if (currentFilter.status === 'yellow') el.tabYellow.classList.add('active');
     else if (currentFilter.status === 'blue') el.tabBlue.classList.add('active');
+    else if (currentFilter.status === 'approved') el.tabApproved.classList.add('active');
   }
 
   function switchView(viewName) {
@@ -379,11 +410,22 @@
     return catalog.products.filter(product => {
       const adData = getProductAdData(product.id);
       const productStatus = adData.status || 'red';
+      const tasks = adData.tasks || [];
+      const hasApprovedTask = tasks.some(t => t.isApproved);
+      const hasPendingTask = tasks.some(t => !t.isApproved);
 
       // Status filter
-      if (currentFilter.status !== 'all' && productStatus !== currentFilter.status) {
+      if (currentFilter.status === 'approved') {
+        if (!hasApprovedTask) return false;
+      } else if (currentFilter.status !== 'all' && productStatus !== currentFilter.status) {
         return false;
       }
+
+      // Video Presence filter
+      if (currentFilter.videoPresence === 'has_videos' && tasks.length === 0) return false;
+      if (currentFilter.videoPresence === 'has_approved' && !hasApprovedTask) return false;
+      if (currentFilter.videoPresence === 'has_pending' && !hasPendingTask) return false;
+      if (currentFilter.videoPresence === 'no_videos' && tasks.length > 0) return false;
 
       // Brand filter
       if (currentFilter.brand !== 'all' && product.brand !== currentFilter.brand) {
@@ -403,7 +445,7 @@
         const desc = (product.description?.uz || '').toLowerCase();
         
         // Also search in comments/tasks
-        const tasksMatch = (adData.tasks || []).some(t => 
+        const tasksMatch = tasks.some(t => 
           (t.title || '').toLowerCase().includes(currentFilter.search) ||
           (t.comment || '').toLowerCase().includes(currentFilter.search)
         );
@@ -421,13 +463,18 @@
     });
   }
 
-  // Calculate Global Statistics
+  // Calculate Global Statistics and Detailed Video Breakdown
   function updateKPIs() {
     const total = catalog.products.length;
     let countRed = 0;
     let countYellow = 0;
     let countBlue = 0;
+    let countWithApproved = 0;
+    
+    let coveredProducts = 0;
     let totalVideos = 0;
+    let approvedVideos = 0;
+    let pendingVideos = 0;
 
     catalog.products.forEach(p => {
       const data = getProductAdData(p.id);
@@ -436,34 +483,54 @@
       else if (s === 'yellow') countYellow++;
       else countRed++;
 
-      if (Array.isArray(data.tasks)) {
-        totalVideos += data.tasks.length;
+      const tasks = Array.isArray(data.tasks) ? data.tasks : [];
+      if (tasks.length > 0) {
+        coveredProducts++;
+        totalVideos += tasks.length;
+        tasks.forEach(t => {
+          if (t.isApproved) approvedVideos++;
+          else pendingVideos++;
+        });
+
+        if (tasks.some(t => t.isApproved)) {
+          countWithApproved++;
+        }
       }
     });
 
     // Update numbers
     el.statTotal.textContent = total;
+    el.statCoveredProducts.innerHTML = `${coveredProducts} <small>/ ${total}</small>`;
+    const coveragePct = total ? ((coveredProducts / total) * 100).toFixed(0) : 0;
+    el.statCoveragePercent.textContent = `${coveragePct}% mahsulotga video bor`;
+
+    el.statTotalVideos.innerHTML = `${totalVideos} <small>ta video</small>`;
+    const avg = coveredProducts > 0 ? (totalVideos / coveredProducts).toFixed(1) : 0;
+    el.statAvgVideos.textContent = coveredProducts > 0 ? `O'rtacha: ${avg} ta video/mahsulot` : 'Hali videolar yo‘q';
+
+    el.statApprovedVideos.innerHTML = `${approvedVideos} <small>ta</small>`;
+    el.statPendingVideos.innerHTML = `${pendingVideos} <small>ta</small>`;
     el.statRed.innerHTML = `${countRed} <small>ta</small>`;
-    el.statYellow.innerHTML = `${countYellow} <small>ta</small>`;
-    el.statBlue.innerHTML = `${countBlue} <small>ta</small>`;
-    el.statVideos.innerHTML = `${totalVideos} <small>ta</small>`;
 
     // Tab counts
     el.countAll.textContent = total;
     el.countRed.textContent = countRed;
     el.countYellow.textContent = countYellow;
     el.countBlue.textContent = countBlue;
+    el.countApproved.textContent = countWithApproved;
 
     // Progress bar
+    const pctGreen = totalVideos ? ((approvedVideos / totalVideos) * 100).toFixed(1) : 0;
     const pctBlue = total ? ((countBlue / total) * 100).toFixed(1) : 0;
     const pctYellow = total ? ((countYellow / total) * 100).toFixed(1) : 0;
     const pctRed = total ? ((countRed / total) * 100).toFixed(1) : 0;
 
+    el.progGreen.style.width = `${pctGreen}%`;
     el.progBlue.style.width = `${pctBlue}%`;
     el.progYellow.style.width = `${pctYellow}%`;
     el.progRed.style.width = `${pctRed}%`;
 
-    el.progressPercent.textContent = `${pctBlue}% tayyor (${countBlue} / ${total})`;
+    el.progressPercent.textContent = `${approvedVideos} ta video mijoz tomonidan tasdiqlangan (${pctGreen}%)`;
   }
 
   // Render Table & Cards
@@ -494,11 +561,34 @@
     return cat ? (cat.name?.uz || cat.name || categoryId) : categoryId;
   }
 
-  // Helper for Image URL with fallback to online website
+  // Helper for Image URL
   function getImageUrl(relPath) {
     if (!relPath) return 'assets/logo_light.png';
-    // Path might be local assets/catalog-2026/...
     return relPath;
+  }
+
+  // Format Date & Time for display (e.g. "19.10.2026, 23:35")
+  function formatDateTime(isoStr) {
+    if (!isoStr) return '';
+    try {
+      const d = new Date(isoStr);
+      if (isNaN(d.getTime())) return isoStr;
+      const day = String(d.getDate()).padStart(2, '0');
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const year = d.getFullYear();
+      const hours = String(d.getHours()).padStart(2, '0');
+      const minutes = String(d.getMinutes()).padStart(2, '0');
+      return `${day}.${month}.${year}, ${hours}:${minutes}`;
+    } catch {
+      return isoStr;
+    }
+  }
+
+  // Format for datetime-local input (YYYY-MM-DDTHH:MM)
+  function toDatetimeLocal(isoStr) {
+    const d = isoStr ? new Date(isoStr) : new Date();
+    const pad = n => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
   }
 
   // Render Table
@@ -506,9 +596,11 @@
     el.tableBody.innerHTML = products.map((p, idx) => {
       const adData = getProductAdData(p.id);
       const status = adData.status || 'red';
-      const cfg = STATUS_CONFIG[status];
       const tasks = adData.tasks || [];
       const latestTask = tasks.length > 0 ? tasks[tasks.length - 1] : null;
+
+      const approvedCount = tasks.filter(t => t.isApproved).length;
+      const pendingCount = tasks.length - approvedCount;
 
       const titleUz = p.title?.uz || p.id;
       const categoryName = getCategoryName(p.categoryId);
@@ -518,7 +610,7 @@
 
       return `
         <tr class="${rowClass}" data-product-id="${escapeHtml(p.id)}">
-          <td style="font-weight: 700; color: #64748b;">${String(idx + 1).padStart(2, '0')}</td>
+          <td style="font-weight: 800; color: #475569;">${String(idx + 1).padStart(2, '0')}</td>
           <td>
             <div class="product-thumb-wrap" onclick="window.appOpenProduct('${escapeHtml(p.id)}')">
               <img 
@@ -551,22 +643,36 @@
             </select>
           </td>
           <td>
-            <button 
-              type="button" 
-              class="videos-count-badge ${tasks.length > 0 ? 'has-videos' : ''}" 
-              onclick="window.appOpenProduct('${escapeHtml(p.id)}')"
-              title="Videolar va ishlarni ko'rish"
-            >
-              <span>🎬</span>
-              <span><strong>${tasks.length}</strong> ta video / ish</span>
-            </button>
+            <div class="video-cell-group">
+              <button 
+                type="button" 
+                class="videos-count-badge ${tasks.length > 0 ? 'has-videos' : ''}" 
+                onclick="window.appOpenProduct('${escapeHtml(p.id)}')"
+                title="Videolar va ishlarni boshqarish"
+              >
+                <span>🎬</span>
+                <span><strong>${tasks.length}</strong> ta video</span>
+              </button>
+
+              ${tasks.length > 0 ? `
+                <div class="video-approval-summary">
+                  ${approvedCount > 0 ? `<span class="badge-approved-mini">✅ ${approvedCount} ta tasdiq</span>` : ''}
+                  ${pendingCount > 0 ? `<span class="badge-pending-mini">⏳ ${pendingCount} ta kutilmoqda</span>` : ''}
+                </div>
+              ` : `<span style="font-size: 0.74rem; color: #94a3b8; font-style: italic;">Video rejalashtirilmagan</span>`}
+            </div>
           </td>
           <td class="latest-comment-cell">
             ${latestTask ? `
               <span class="latest-comment-text" title="${escapeHtml(latestTask.comment || latestTask.title)}">
                 <strong>${escapeHtml(TYPE_NAMES[latestTask.type] || latestTask.type)}:</strong> ${escapeHtml(latestTask.title)}
               </span>
-              <span class="latest-comment-date">${formatDate(latestTask.createdAt)} · ${STATUS_CONFIG[latestTask.status || 'red'].label}</span>
+              <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
+                <span class="latest-comment-date">🕒 ${formatDateTime(latestTask.createdAt)}</span>
+                ${latestTask.isApproved ? 
+                  `<span class="badge-approved-mini" style="font-size: 0.68rem;">✅ Tasdiqlangan</span>` : 
+                  `<span class="badge-pending-mini" style="font-size: 0.68rem;">⏳ Kutilmoqda</span>`}
+              </div>
             ` : `<span style="color: #94a3b8; font-size: 0.8rem; font-style: italic;">Hali izoh yo'q</span>`}
           </td>
           <td>
@@ -596,11 +702,14 @@
 
   // Render Cards
   function renderCards(products) {
-    el.cardsGrid.innerHTML = products.map((p, idx) => {
+    el.cardsGrid.innerHTML = products.map((p) => {
       const adData = getProductAdData(p.id);
       const status = adData.status || 'red';
       const tasks = adData.tasks || [];
       const latestTask = tasks.length > 0 ? tasks[tasks.length - 1] : null;
+
+      const approvedCount = tasks.filter(t => t.isApproved).length;
+      const pendingCount = tasks.length - approvedCount;
 
       const titleUz = p.title?.uz || p.id;
       const categoryName = getCategoryName(p.categoryId);
@@ -621,12 +730,12 @@
             <div class="card-title-group">
               <span class="product-brand-tag">${escapeHtml(p.brand)}</span>
               <h3 class="product-title" style="cursor: pointer;" onclick="window.appOpenProduct('${escapeHtml(p.id)}')">${escapeHtml(titleUz)}</h3>
-              <span style="font-size: 0.76rem; color: #64748b;">${escapeHtml(categoryName)}</span>
+              <span style="font-size: 0.76rem; color: #475569; font-weight: 500;">${escapeHtml(categoryName)} ${packagesText ? '· ' + escapeHtml(packagesText) : ''}</span>
             </div>
           </div>
           <div class="card-body">
             <div class="card-status-row">
-              <span style="font-size: 0.8rem; font-weight: 600; color: #64748b;">Holati:</span>
+              <span style="font-size: 0.8rem; font-weight: 700; color: #475569;">Holati:</span>
               <select 
                 class="quick-status-select select-${status}" 
                 onchange="window.appChangeQuickStatus('${escapeHtml(p.id)}', this.value)"
@@ -638,11 +747,20 @@
             </div>
             
             <div class="card-comments-box">
-              <strong>🎬 Rejalashtirilgan videolar (${tasks.length} ta):</strong>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <strong>🎬 Videolar (${tasks.length} ta):</strong>
+                ${tasks.length > 0 ? `
+                  <div style="display: flex; gap: 4px;">
+                    <span class="badge-approved-mini">✅ ${approvedCount}</span>
+                    <span class="badge-pending-mini">⏳ ${pendingCount}</span>
+                  </div>
+                ` : ''}
+              </div>
               ${latestTask ? `
                 <div style="margin-top: 4px;">
-                  <span style="font-weight: 600; color: #1e293b;">${escapeHtml(latestTask.title)}</span>
-                  <p style="font-size: 0.78rem; color: #64748b; margin-top: 2px;">${escapeHtml(latestTask.comment || 'Izohsiz')}</p>
+                  <span style="font-weight: 700; color: #0f172a;">${escapeHtml(latestTask.title)}</span>
+                  <p style="font-size: 0.8rem; color: #475569; margin-top: 2px;">${escapeHtml(latestTask.comment || 'Izohsiz')}</p>
+                  <small style="font-size: 0.72rem; color: #94a3b8; font-weight: 600;">🕒 ${formatDateTime(latestTask.createdAt)}</small>
                 </div>
               ` : `
                 <span style="color: #94a3b8; font-style: italic;">Hozircha video qo'shilmagan</span>
@@ -656,7 +774,7 @@
               style="flex: 1;"
               onclick="window.appOpenProduct('${escapeHtml(p.id)}')"
             >
-              <span>🎬 Ishlar va Izohlar (${tasks.length})</span>
+              <span>🎬 Ishlar va Videolar (${tasks.length})</span>
             </button>
             <a 
               href="https://elementpaint.uz/?product=${encodeURIComponent(p.id)}" 
@@ -696,13 +814,12 @@
     // Set Radio status
     updateModalStatusSelection(status);
 
-    // Reset task form
+    // Reset task form & set default time to now
     resetTaskForm();
 
     // Render tasks list
     renderModalTaskList(adData.tasks || []);
 
-    // Show modal using native showModal() as required by modern-web-guidance
     if (!el.productModal.open) {
       el.productModal.showModal();
     }
@@ -748,6 +865,7 @@
     el.modalTaskList.innerHTML = tasks.map((task) => {
       const cfg = STATUS_CONFIG[task.status || 'red'];
       const typeLabel = TYPE_NAMES[task.type] || task.type || 'Video';
+      const isApproved = !!task.isApproved;
 
       return `
         <div class="task-card-item status-${task.status || 'red'}" data-task-id="${escapeHtml(task.id)}">
@@ -758,11 +876,35 @@
                 <span>${cfg.label}</span>
               </span>
               <span class="task-badge-type">${escapeHtml(typeLabel)}</span>
-              <span class="task-date">📅 ${formatDate(task.createdAt)}</span>
-              ${task.deadline ? `<span class="task-date" style="color: #d97706;">⏰ Muddat: ${escapeHtml(task.deadline)}</span>` : ''}
+              
+              <!-- Approval Badge -->
+              ${isApproved ? `
+                <span class="task-badge-approved">
+                  <span>✅</span>
+                  <span>Mijoz tasdiqlagan (Ishlatilmoqda)</span>
+                </span>
+              ` : `
+                <span class="task-badge-pending">
+                  <span>⏳</span>
+                  <span>Hali tasdiqlanmagan</span>
+                </span>
+              `}
+
+              <!-- Exact Timestamp -->
+              <span class="task-date">🕒 ${formatDateTime(task.createdAt)}</span>
             </div>
             
             <div class="task-item-btns">
+              <!-- Quick Toggle Approval Button -->
+              <button 
+                type="button" 
+                class="btn-toggle-approval ${isApproved ? 'is-approved' : 'not-approved'}"
+                onclick="window.appToggleTaskApproval('${escapeHtml(task.id)}')"
+                title="${isApproved ? 'Tasdiqni bekor qilish' : 'Mijoz tasdiqlagan deb belgilash'}"
+              >
+                ${isApproved ? '✅ Tasdiqlangan' : '⏳ Tasdiqlash'}
+              </button>
+
               <button 
                 type="button" 
                 class="btn btn-outline btn-sm" 
@@ -800,7 +942,7 @@
 
             <!-- Quick subtask status change -->
             <div style="display: flex; align-items: center; gap: 6px;">
-              <span style="font-size: 0.75rem; color: #64748b;">Holatni almashtirish:</span>
+              <span style="font-size: 0.76rem; color: #475569; font-weight: 600;">Ish holati:</span>
               <select 
                 class="quick-status-select select-${task.status || 'red'}" 
                 style="padding: 2px 6px; font-size: 0.75rem;"
@@ -831,9 +973,17 @@
 
     const type = el.taskTypeSelect.value;
     const status = el.taskStatusSelect.value;
+    const isApproved = el.taskIsApprovedInput.checked;
     const link = el.taskLinkInput.value.trim();
     const comment = el.taskCommentInput.value.trim();
-    const deadline = el.taskDeadlineInput.value;
+
+    // Handling date & time: if left blank, automatically set to exact current time!
+    let createdAt = el.taskCreatedAtInput.value;
+    if (!createdAt) {
+      createdAt = new Date().toISOString();
+    } else {
+      createdAt = new Date(createdAt).toISOString();
+    }
 
     const adData = getProductAdData(activeProductId);
     if (!adData.tasks) adData.tasks = [];
@@ -847,9 +997,10 @@
           title,
           type,
           status,
+          isApproved,
           link,
           comment,
-          deadline,
+          createdAt: createdAt, // user modified or kept
           updatedAt: new Date().toISOString()
         };
         showToast('Reklama ishi yangilandi!', 'success');
@@ -861,24 +1012,23 @@
         title,
         type,
         status,
+        isApproved,
         link,
         comment,
-        deadline,
-        createdAt: new Date().toISOString()
+        createdAt: createdAt
       };
       adData.tasks.unshift(newTask);
 
-      // Auto update product status if it was red and we added a planned/done video
-      if (adData.status === 'red' && status !== 'red') {
-        adData.status = status;
-        updateModalStatusSelection(status);
-      } else if (status === 'blue' && adData.status !== 'blue') {
-        // Option to recommend blue
+      // Auto update product status
+      if (isApproved || status === 'blue') {
         adData.status = 'blue';
         updateModalStatusSelection('blue');
+      } else if (adData.status === 'red' && status !== 'red') {
+        adData.status = status;
+        updateModalStatusSelection(status);
       }
 
-      showToast('Yangi video / ish muvaffaqiyatli saqlandi!', 'success');
+      showToast('Yangi video muvaffaqiyatli saqlandi!', 'success');
     }
 
     saveAdStore();
@@ -893,9 +1043,13 @@
     el.taskTitleInput.value = '';
     el.taskTypeSelect.value = 'reels';
     el.taskStatusSelect.value = 'red';
+    el.taskIsApprovedInput.checked = false;
     el.taskLinkInput.value = '';
     el.taskCommentInput.value = '';
-    el.taskDeadlineInput.value = '';
+    
+    // Set taskCreatedAtInput to current local time by default!
+    el.taskCreatedAtInput.value = toDatetimeLocal(new Date().toISOString());
+
     el.taskFormTitle.innerHTML = '<span>➕</span> Yangi Video / Reklama Ishi Qo‘shish';
     el.btnSaveTask.textContent = '➕ Ishni Saqlash';
     el.btnCancelTaskEdit.hidden = true;
@@ -912,9 +1066,10 @@
     el.taskTitleInput.value = task.title || '';
     el.taskTypeSelect.value = task.type || 'reels';
     el.taskStatusSelect.value = task.status || 'red';
+    el.taskIsApprovedInput.checked = !!task.isApproved;
     el.taskLinkInput.value = task.link || '';
     el.taskCommentInput.value = task.comment || '';
-    el.taskDeadlineInput.value = task.deadline || '';
+    el.taskCreatedAtInput.value = toDatetimeLocal(task.createdAt);
 
     el.taskFormTitle.innerHTML = '<span>✏️</span> Reklama Ishini Tahrirlash';
     el.btnSaveTask.textContent = '💾 O‘zgarishlarni Saqlash';
@@ -936,6 +1091,26 @@
     saveAdStore();
 
     showToast('Ish o‘chirildi', 'info');
+    renderModalTaskList(adData.tasks);
+    render();
+  }
+
+  // Toggle Approval directly from card
+  function toggleTaskApproval(taskId) {
+    if (!activeProductId) return;
+    const adData = getProductAdData(activeProductId);
+    const task = (adData.tasks || []).find(t => t.id === taskId);
+    if (!task) return;
+
+    task.isApproved = !task.isApproved;
+    if (task.isApproved) {
+      task.status = 'blue';
+      adData.status = 'blue';
+      updateModalStatusSelection('blue');
+    }
+
+    saveAdStore();
+    showToast(task.isApproved ? 'Video: Mijoz tasdiqlagan deb belgilandi! ✅' : 'Tasdiq holati olib tashlandi ⏳', 'success');
     renderModalTaskList(adData.tasks);
     render();
   }
@@ -963,7 +1138,7 @@
   // Export JSON (Backup)
   function exportJson() {
     const backupData = {
-      version: 1,
+      version: 2,
       exportedAt: new Date().toISOString(),
       adStore: adStore
     };
@@ -1014,7 +1189,7 @@
   // Export CSV (Excel format with UTF-8 BOM)
   function exportCsv() {
     let csv = '\uFEFF'; // UTF-8 BOM for Excel
-    csv += '№;Mahsulot Nomi;Brend;Kategoriya;Qadoq;Reklama Holati;Jami Videolar;Videolar Tafsiloti;Izohlar\n';
+    csv += '№;Mahsulot Nomi;Brend;Kategoriya;Qadoq;Reklama Holati;Jami Videolar;Tasdiqlangan Videolar;Tasdiqlanmagan Videolar;Videolar Tafsiloti;Izohlar\n';
 
     catalog.products.forEach((p, idx) => {
       const adData = getProductAdData(p.id);
@@ -1023,7 +1198,14 @@
       const pack = p.packages ? p.packages.join(' / ') + ' ' + (p.packageUnit || 'kg') : '';
       const tasks = adData.tasks || [];
       
-      const taskDetails = tasks.map(t => `[${TYPE_NAMES[t.type] || t.type}] ${t.title} (${STATUS_CONFIG[t.status || 'red'].label})`).join(' | ');
+      const approvedCount = tasks.filter(t => t.isApproved).length;
+      const pendingCount = tasks.length - approvedCount;
+
+      const taskDetails = tasks.map(t => {
+        const appr = t.isApproved ? '✅ Tasdiqlangan' : '⏳ Kutilmoqda';
+        return `[${TYPE_NAMES[t.type] || t.type}] ${t.title} (${STATUS_CONFIG[t.status || 'red'].label}, ${appr}, Vaqt: ${formatDateTime(t.createdAt)})`;
+      }).join(' | ');
+
       const comments = tasks.map(t => t.comment).filter(Boolean).join(' | ');
 
       const row = [
@@ -1034,6 +1216,8 @@
         `"${pack.replace(/"/g, '""')}"`,
         `"${statusLabel}"`,
         tasks.length,
+        approvedCount,
+        pendingCount,
         `"${taskDetails.replace(/"/g, '""')}"`,
         `"${comments.replace(/"/g, '""')}"`
       ];
@@ -1085,26 +1269,12 @@
       .replace(/'/g, '&#039;');
   }
 
-  // Helper: Date format
-  function formatDate(isoStr) {
-    if (!isoStr) return '';
-    try {
-      const d = new Date(isoStr);
-      return d.toLocaleDateString('uz-UZ', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-      });
-    } catch {
-      return isoStr;
-    }
-  }
-
   // Expose global window hooks for inline handlers
   window.appOpenProduct = openProductModal;
   window.appChangeQuickStatus = changeQuickStatus;
   window.appEditTask = editTask;
   window.appDeleteTask = deleteTask;
+  window.appToggleTaskApproval = toggleTaskApproval;
   window.appChangeTaskStatus = changeTaskStatus;
 
   // Run on load

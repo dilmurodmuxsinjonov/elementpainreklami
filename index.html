@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Element Paint — Reklama va Kontent Boshqaruv Ish Jadvali</title>
-  <meta name="description" content="Element Paint 73 ta mahsulot reklama holatlari, video kontent rejalari va izohlar ish jadvali.">
+  <meta name="description" content="Element Paint 73 ta mahsulot reklama holatlari, tasdiqlangan videolar hisoboti va izohlar ish jadvali.">
   <link rel="icon" type="image/png" href="assets/logo_light.png">
   
   <!-- Main Stylesheet -->
@@ -13,7 +13,7 @@
 <body>
 
   <!-- ========================================================================
-       App Header & Statistics Dashboard
+       App Header & Statistics Dashboard (Executive KPIs)
        ======================================================================== -->
   <header class="app-header">
     <div class="container">
@@ -23,9 +23,9 @@
           <div class="brand-meta">
             <h1>
               <span>Element Paint</span>
-              <span class="badge-official">Reklama Markazi</span>
+              <span class="badge-official">Reklama & Media Markazi</span>
             </h1>
-            <p>73 ta mahsulot reklama monitoringi, video kontent rejalari va izohlar boshqaruvi</p>
+            <p>73 ta mahsulot monitoringi, video hisoboti (tasdiqlangan / kutilayotgan) va izohlar jadvali</p>
           </div>
         </div>
 
@@ -38,7 +38,7 @@
           <button type="button" class="btn btn-secondary btn-sm" id="btnExportJson" title="Barcha ma'lumotlarni saqlab olish">
             <span>📤 JSON Zaxira</span>
           </button>
-          <button type="button" class="btn btn-primary btn-sm" id="btnExportCsv" title="Excel formatida hisobot yuklash">
+          <button type="button" class="btn btn-primary btn-sm" id="btnExportCsv" title="Excel formatida to'liq hisobot yuklash">
             <span>📊 Excel / CSV Hisobot</span>
           </button>
           <button type="button" class="btn btn-secondary btn-sm" id="btnPrintReport" title="Sahifani chop etish yoki PDF qilish">
@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <!-- KPI Dashboard Cards -->
+      <!-- KPI Dashboard Cards (Nechta video nechta mahsulotga va tasdiqlanish hisoboti) -->
       <div class="stats-grid">
         <div class="stat-card stat-total">
           <div class="stat-header">
@@ -58,50 +58,60 @@
           <span class="stat-desc">Katalogdagi barcha tovarlar</span>
         </div>
 
+        <div class="stat-card stat-coverage">
+          <div class="stat-header">
+            <span class="stat-title" style="color: #7dd3fc;">Videoli Mahsulotlar</span>
+            <span class="stat-icon">🎯</span>
+          </div>
+          <div class="stat-value" id="statCoveredProducts" style="color: #38bdf8;">0 <small>/ 73</small></div>
+          <span class="stat-desc" id="statCoveragePercent">0% qamrov</span>
+        </div>
+
+        <div class="stat-card stat-videos">
+          <div class="stat-header">
+            <span class="stat-title" style="color: #e9d5ff;">Jami Videolar</span>
+            <span class="stat-icon">🎬</span>
+          </div>
+          <div class="stat-value" id="statTotalVideos" style="color: #c084fc;">0 <small>ta video</small></div>
+          <span class="stat-desc" id="statAvgVideos">Mahsulotlarga rejalashtirilgan</span>
+        </div>
+
+        <div class="stat-card stat-approved">
+          <div class="stat-header">
+            <span class="stat-title" style="color: #6ee7b7;">Mijoz Tasdiqlagan</span>
+            <span class="stat-icon">✅</span>
+          </div>
+          <div class="stat-value" id="statApprovedVideos" style="color: #34d399;">0 <small>ta video</small></div>
+          <span class="stat-desc">Mijozga yoqqan va ishlatilgan</span>
+        </div>
+
+        <div class="stat-card stat-pending-approval">
+          <div class="stat-header">
+            <span class="stat-title" style="color: #fde68a;">Tasdiqlanmagan</span>
+            <span class="stat-icon">⏳</span>
+          </div>
+          <div class="stat-value" id="statPendingVideos" style="color: #fbbf24;">0 <small>ta video</small></div>
+          <span class="stat-desc">Ko'rib chiqilmoqda / kutilmoqda</span>
+        </div>
+
         <div class="stat-card stat-red">
           <div class="stat-header">
             <span class="stat-title" style="color: #fca5a5;">Hali Qilinmagan</span>
             <span class="stat-icon">🔴</span>
           </div>
-          <div class="stat-value" id="statRed" style="color: #f87171;">0 <small>ta</small></div>
+          <div class="stat-value" id="statRed" style="color: #f87171;">73 <small>ta</small></div>
           <span class="stat-desc">Reklama kutilayotgan mahsulotlar</span>
-        </div>
-
-        <div class="stat-card stat-yellow">
-          <div class="stat-header">
-            <span class="stat-title" style="color: #fde68a;">Reja Tuzilgan</span>
-            <span class="stat-icon">🟡</span>
-          </div>
-          <div class="stat-value" id="statYellow" style="color: #fbbf24;">0 <small>ta</small></div>
-          <span class="stat-desc">Ssenariy / Jarayondagi ishlar</span>
-        </div>
-
-        <div class="stat-card stat-blue">
-          <div class="stat-header">
-            <span class="stat-title" style="color: #bfdbfe;">Tayyorlangan</span>
-            <span class="stat-icon">🔵</span>
-          </div>
-          <div class="stat-value" id="statBlue" style="color: #60a5fa;">0 <small>ta</small></div>
-          <span class="stat-desc">Reklamasi tayyor bo'lganlar</span>
-        </div>
-
-        <div class="stat-card stat-videos">
-          <div class="stat-header">
-            <span class="stat-title" style="color: #e9d5ff;">Jami Videolar / Ishlar</span>
-            <span class="stat-icon">🎬</span>
-          </div>
-          <div class="stat-value" id="statVideos" style="color: #c084fc;">0 <small>ta</small></div>
-          <span class="stat-desc">Barcha rejalashtirilgan kontentlar</span>
         </div>
       </div>
 
       <!-- Overall Advertising Progress Bar -->
       <div class="header-progress">
         <div class="progress-info">
-          <span>Umumiy Reklama Tayyorlik Darajasi</span>
-          <span id="progressPercent">0%</span>
+          <span>Umumiy Reklama Tayyorlik va Tasdiqlanish Holati</span>
+          <span id="progressPercent">0% tasdiqlangan</span>
         </div>
         <div class="progress-bar-track">
+          <div class="progress-segment green" id="progGreen" style="width: 0%;" title="Mijoz tasdiqlagan & ishlatilgan"></div>
           <div class="progress-segment blue" id="progBlue" style="width: 0%;" title="Tayyorlangan"></div>
           <div class="progress-segment yellow" id="progYellow" style="width: 0%;" title="Reja tuzilgan"></div>
           <div class="progress-segment red" id="progRed" style="width: 100%;" title="Hali qilinmagan"></div>
@@ -137,6 +147,10 @@
               <span>🔵 Tayyorlangan</span>
               <span class="tab-count" id="countBlue">0</span>
             </button>
+            <button type="button" class="tab-btn tab-approved" id="tabApproved">
+              <span>✅ Tasdiqlangan videolar</span>
+              <span class="tab-count" id="countApproved">0</span>
+            </button>
           </div>
 
           <!-- View Switcher -->
@@ -158,10 +172,19 @@
               type="search" 
               id="searchInput" 
               class="search-input" 
-              placeholder="Mahsulot nomi, kodi, brendi yoki izoh bo'yicha qidiruv..."
+              placeholder="Mahsulot nomi, kodi, brendi yoki izohlar bo'yicha qidiruv..."
               aria-label="Mahsulotlarni qidirish"
             />
           </div>
+
+          <!-- Video Presence filter -->
+          <select id="videoFilterSelect" class="select-filter" aria-label="Video mavjudligi bo'yicha">
+            <option value="all">Barcha mahsulotlar</option>
+            <option value="has_videos">🎬 Faqat videoli mahsulotlar</option>
+            <option value="has_approved">✅ Tasdiqlangan videoli</option>
+            <option value="has_pending">⏳ Tasdiqlanmagan videoli</option>
+            <option value="no_videos">🚫 Videosi yo'q mahsulotlar</option>
+          </select>
 
           <!-- Brand filter -->
           <select id="brandSelect" class="select-filter" aria-label="Brend bo'yicha saralash">
@@ -183,8 +206,8 @@
       <!-- Results metadata -->
       <div class="results-meta">
         <span id="resultsCount">73 ta mahsulot ko'rsatilmoqda</span>
-        <span style="font-size: 0.8rem; color: #94a3b8;">
-          💡 Maslahat: Har bir mahsulot qatoridagi <strong>"➕ Ishlar & Izoh"</strong> tugmasini bosib bir nechta video va topshiriq qo'shishingiz mumkin.
+        <span style="font-size: 0.82rem; color: #64748b;">
+          💡 <strong>Qulaylik:</strong> Har bir mahsulot yonidagi <strong>«➕ Ishlar & Izoh»</strong> tugmasi orqali cheksiz video qo‘shishingiz va ularning mijoz tomonidan tasdiqlanishini belgilashingiz mumkin.
         </span>
       </div>
 
@@ -194,13 +217,13 @@
           <table class="ad-table">
             <thead>
               <tr>
-                <th style="width: 50px;">№</th>
-                <th style="width: 70px;">Rasm</th>
-                <th>Mahsulot Nomi & Ma'lumot</th>
-                <th style="width: 190px;">Reklama Holati</th>
-                <th style="width: 170px;">Videolar / Ishlar</th>
+                <th style="width: 48px;">№</th>
+                <th style="width: 76px;">Rasm</th>
+                <th>Mahsulot Nomi & Tafsilot</th>
+                <th style="width: 195px;">Reklama Holati</th>
+                <th style="width: 210px;">Videolar & Tasdiq</th>
                 <th>So'nggi Izoh / Topshiriq</th>
-                <th style="width: 160px; text-align: right;">Amallar</th>
+                <th style="width: 170px; text-align: right;">Amallar</th>
               </tr>
             </thead>
             <tbody id="adTableBody">
@@ -294,7 +317,9 @@
             
             <div class="form-grid">
               <div class="form-group">
-                <label for="taskTitleInput" class="form-label">Video / Ish Mavzusi *</label>
+                <label for="taskTitleInput" class="form-label">
+                  <span>Video / Ish Mavzusi *</span>
+                </label>
                 <input 
                   type="text" 
                   id="taskTitleInput" 
@@ -305,7 +330,9 @@
               </div>
 
               <div class="form-group">
-                <label for="taskTypeSelect" class="form-label">Kontent Formati</label>
+                <label for="taskTypeSelect" class="form-label">
+                  <span>Kontent Formati</span>
+                </label>
                 <select id="taskTypeSelect" class="form-select">
                   <option value="reels">Instagram Reels</option>
                   <option value="tiktok">TikTok Video</option>
@@ -319,7 +346,9 @@
               </div>
 
               <div class="form-group">
-                <label for="taskStatusSelect" class="form-label">Ushbu Videoning Holati</label>
+                <label for="taskStatusSelect" class="form-label">
+                  <span>Ushbu Videoning Ishlash Holati</span>
+                </label>
                 <select id="taskStatusSelect" class="form-select">
                   <option value="red">🔴 Hali qilinmagan (Olinmagan)</option>
                   <option value="yellow">🟡 Reja tuzilgan (Ssenariy / Jarayonda)</option>
@@ -328,12 +357,29 @@
               </div>
 
               <div class="form-group">
-                <label for="taskDeadlineInput" class="form-label">Muddat / Rejalashtirilgan Sana</label>
-                <input type="date" id="taskDeadlineInput" class="form-input">
+                <label for="taskCreatedAtInput" class="form-label">
+                  <span>Ish qilingan sana va vaqt</span>
+                  <span class="form-label-hint">Bo‘sh qoldirilsa avtomatik hozirgi vaqt qo‘yiladi</span>
+                </label>
+                <input type="datetime-local" id="taskCreatedAtInput" class="form-input">
+              </div>
+
+              <!-- Customer Approval Checkbox (Mijozga yoqqan va ishlatilgan) -->
+              <div class="form-group form-group-full">
+                <label class="approval-toggle-box" for="taskIsApprovedInput">
+                  <input type="checkbox" id="taskIsApprovedInput">
+                  <div class="approval-toggle-text">
+                    <strong>⭐ Mijoz tasdiqlagan va ishlatilayotgan video</strong>
+                    <p>Element Paint mijoziga yoqib, ma'qullangan va amalda reklama sifatida ishlatilayotgan bo‘lsa belgilang.</p>
+                  </div>
+                </label>
               </div>
 
               <div class="form-group form-group-full">
-                <label for="taskLinkInput" class="form-label">Video / Material Havolasi (Google Drive, Telegram, Instagram link)</label>
+                <label for="taskLinkInput" class="form-label">
+                  <span>Video / Fayl Havolasi</span>
+                  <span class="form-label-hint">Google Drive, Telegram, YouTube yoki Instagram linki</span>
+                </label>
                 <input 
                   type="url" 
                   id="taskLinkInput" 
@@ -343,12 +389,14 @@
               </div>
 
               <div class="form-group form-group-full">
-                <label for="taskCommentInput" class="form-label">Batafsil Izoh / Video Ssenariysi / Eslatmalar</label>
+                <label for="taskCommentInput" class="form-label">
+                  <span>Batafsil Izoh / Video Ssenariysi / Eslatmalar</span>
+                </label>
                 <textarea 
                   id="taskCommentInput" 
                   class="form-textarea" 
                   rows="3" 
-                  placeholder="Ushbu video uchun g'oya, ssenariy kadrlari, usta gaplari yoki muhim nuqtalar..."
+                  placeholder="Ushbu video uchun g'oya, ssenariy kadrlari, mutaxassis tavsiyalari yoki muhim nuqtalar..."
                 ></textarea>
               </div>
 
@@ -364,11 +412,11 @@
         <!-- Tasks / Videos History List -->
         <section class="tasks-history-section">
           <h3>
-            <span>Ushbu mahsulot uchun yaratilgan ishlar va videolar (<span id="modalTaskCount">0</span>)</span>
+            <span>Ushbu mahsulot uchun yaratilgan barcha videolar va izohlar (<span id="modalTaskCount">0</span>)</span>
           </h3>
 
           <div id="modalEmptyTasks" class="empty-state" style="padding: 24px; margin: 0;">
-            <p>Hozircha ushbu mahsulot uchun video yoki reklama ishi kiritilmagan.<br>Yuqoridagi formadan birinchi videoni rejalashtiring.</p>
+            <p>Hozircha ushbu mahsulot uchun video yoki reklama ishi kiritilmagan.<br>Yuqoridagi formadan birinchi videoni qo‘shing.</p>
           </div>
 
           <div class="task-list" id="modalTaskList">
